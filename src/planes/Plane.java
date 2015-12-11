@@ -8,15 +8,17 @@ public abstract class Plane implements Evaluable{
 	protected int speed;
 	protected int autonomy;
 	protected int engine_nb;
-	protected Engine engines[];
+	protected Engine engine;
+	protected Constructor constructor;
 	
-	public Plane(String n, int pass, int y, int s, int a, int eng){
+	public Plane(String n, int pass, int y, int s, int a, int eng, String t, String c){
 		name = n;
 		passagers_nb = pass;
 		year = y;
 		speed = s;
 		autonomy = a;
 		engine_nb = eng;
-		engines = new Engine[engine_nb];
+		engine = new Engine(t);
+		constructor = new Constructor(c);
 	}
 }
