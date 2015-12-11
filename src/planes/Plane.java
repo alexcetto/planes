@@ -2,11 +2,21 @@ package planes;
 
 public abstract class Plane implements Evaluable{
 	
-	// Test private/protected pour l'accès pour les classes filles ?
-	private String name;
-	private int passagers_nb;
-	private int year;
-	private int speed;
-	private int autonomy;
-	private Engine engines[];
+	protected String name;
+	protected int passagers_nb;
+	protected int year;
+	protected int speed;
+	protected int autonomy;
+	protected int engine_nb;
+	protected Engine engines[];
+	
+	public Plane(String n, int pass, int y, int s, int a, int eng){
+		name = n;
+		passagers_nb = pass;
+		year = y;
+		speed = s;
+		autonomy = a;
+		engine_nb = eng;
+		engines = new Engine[engine_nb];
+	}
 }
