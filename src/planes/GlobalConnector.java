@@ -25,7 +25,7 @@ public class GlobalConnector {
 	        String motDePasse = "I like to fly !";
 	        try {
 	            conn = DriverManager.getConnection( url, utilisateur, motDePasse );
-	            if(conn != null) System.out.println("Connexion établie : "+conn);
+	            //if(conn != null) System.out.println("Connexion établie : "+conn);
 	        } catch (SQLException ex) {
 	            // handle any errors
 	            System.out.println("SQLException in Connection: " + ex.getMessage());
@@ -66,7 +66,7 @@ public class GlobalConnector {
         try {
             stmt = conn.createStatement();
             // UTILISER PREPAREDSTATEMENT POUR PLUS DE SECU
-            rs = stmt.executeQuery("SELECT mfr, model FROM planes WHERE mfr LIKE '%Airbus%'");
+            rs = stmt.executeQuery("SELECT mfr, model FROM plane WHERE mfr LIKE '%Airbus%'");
 
             while ( rs.next() ) {
                 String mfr = rs.getString( "mfr" );

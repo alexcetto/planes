@@ -12,7 +12,7 @@ public class Main {
 		GlobalConnector gc = new GlobalConnector();
 		//Connection co = gc.getCo();
 		
-		User usr = new User();
+		User usr = new User(gc);
 		
 	}
 }
