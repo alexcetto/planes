@@ -4,30 +4,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 /**
  * Created by alexandrecetto on 12/12/2015.
  */
 public class User {
     String name;
-    Byte mdp;
+    String mdp;
     boolean admin;
 
-    public User(String s, Byte b){
-    	name = s;
-    	mdp = b;
+    public User(String login, String password, boolean isAdmin){
+    	name = login;
+    	mdp = password;
+    	admin = isAdmin;
     }
     
     public User(GlobalConnector gc){
-    	Scanner sc = new Scanner(System.in);
-		System.out.print("Login : ");
-		String usrName = sc.next();
-		String usrPass;
+		String usrName, usrPass;
 		PreparedStatement pstt;
 		ResultSet rs;
-		
+
+		System.out.print("\n\nLogin : ");
 		Connection co = gc.getCo();
+		usrName = Main.sc.next();
 		try {
 			pstt = co.prepareStatement(
 					"SELECT login, password, admin FROM users WHERE login='"+usrName+"'"
@@ -35,7 +34,7 @@ public class User {
 			rs = pstt.executeQuery();
 			if(rs.next()){
 				System.out.print("User found in database\nPassword : ");
-				if(sc.next().equals(rs.getString("password"))){
+				if(Main.sc.next().equals(rs.getString("password"))){
 					admin = rs.getBoolean("admin");
 					System.out.print("Welcome back ");
 					if(admin) System.out.print("Admin ");
@@ -45,7 +44,7 @@ public class User {
 				}
             }else{
             	System.out.print("New user - "+usrName+"\nPassword : ");
-            	usrPass = sc.next();
+            	usrPass = Main.sc.next();
             	pstt = co.prepareStatement(
             			"INSERT INTO users VALUES('"+usrName+"','"+usrPass+"')"
             			);
@@ -56,7 +55,9 @@ public class User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		sc.close();
+    }
+    
+    public boolean isAdmin(){
+    	return admin;
     }
 }
