@@ -3,8 +3,6 @@ package planes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
 
 public class GlobalConnector {
 	
@@ -14,11 +12,11 @@ public class GlobalConnector {
 		if(conn != null)
 			return conn;
 		else{
-			/* Chargement du driver JDBC pour MySQL */
+			// Chargement du driver JDBC pour MySQL
 	        try {
 	            Class.forName("org.mariadb.jdbc.Driver");
 	        } catch ( ClassNotFoundException e ) {
-	            /* Gérer les éventuelles erreurs ici. */
+	            // Gérer les éventuelles erreurs ici.
 	            System.out.println("e = " + e);
 	        }
 	        Connection conn = null;
