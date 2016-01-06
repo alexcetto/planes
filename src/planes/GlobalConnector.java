@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class GlobalConnector {
-    Connection conn;
+	Connection conn;
 
     public GlobalConnector(){
 
