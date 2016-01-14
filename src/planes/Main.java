@@ -74,8 +74,8 @@ public class Main {
 		int choice;
 		
 		while(runMain){
-			//User usr = new User(gc);
-			User usr = new User("Kyanto", "password", true);
+			User usr = new User(gc);
+			//User usr = new User("Kyanto", "password", true);
 			if(usr!=null) runUser = true;
 			
 			while(runUser){
