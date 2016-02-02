@@ -1,6 +1,6 @@
-package planes;
+package planes.Others;
 
-public class Constructor {
+public class Constructor{
 
 	private String name;
 

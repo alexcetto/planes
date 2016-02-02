@@ -1,4 +1,4 @@
-package planes;
+package planes.Civil;
 
 public class Airliner extends Civil {
 

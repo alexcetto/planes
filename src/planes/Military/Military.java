@@ -1,4 +1,6 @@
-package planes;
+package planes.Military;
+
+import planes.Plane;
 
 public abstract class Military extends Plane{
 

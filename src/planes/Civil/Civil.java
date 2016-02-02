@@ -1,4 +1,6 @@
-package planes;
+package planes.Civil;
+
+import planes.Plane;
 
 public abstract class Civil extends Plane{
 

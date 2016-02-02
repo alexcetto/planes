@@ -1,4 +1,4 @@
-package planes;
+package planes.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

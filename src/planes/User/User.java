@@ -1,9 +1,11 @@
-package planes;
+package planes.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import planes.Main;
 
 /**
  * Created by alexandrecetto on 12/12/2015.

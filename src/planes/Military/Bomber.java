@@ -1,4 +1,4 @@
-package planes;
+package planes.Military;
 
 public class Bomber extends Military {
 

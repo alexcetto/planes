@@ -1,6 +1,6 @@
-package planes;
+package planes.Others;
 
-public class Engine {
+public class Engine{
 	
 	private String type;
 	/* Existing types :

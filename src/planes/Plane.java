@@ -1,6 +1,8 @@
 package planes;
 
-public abstract class Plane implements Evaluable{
+import planes.Others.*;
+
+public abstract class Plane implements Evaluable {
 	
 	protected String name;
 	protected int passagers_nb;
@@ -20,5 +22,11 @@ public abstract class Plane implements Evaluable{
 		engine_nb = eng;
 		engine = new Engine(t);
 		constructor = new Constructor(c);
+	}
+	
+	public int evaluate(String n, int pass, int y, int s, int a, int eng, String t, String c){
+		int score=0;
+		// Do the evaluation of the criteria
+		return score;
 	}
 }
