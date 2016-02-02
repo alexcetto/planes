@@ -8,8 +8,8 @@ public class Main {
 	
 	public static Scanner sc = new Scanner(System.in);
 	
-	public static void menuUser(){
-		
+	public static int menuUser(){
+		return 0;
 	}
 	
 	public static int menuAdmin(){
@@ -94,7 +94,7 @@ public class Main {
 						default:
 					}
 				}else{
-					
+					choice = menuUser();
 					System.out.println("Sorry User but your process is in another time");
 				}
 			}	

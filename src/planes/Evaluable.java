@@ -12,5 +12,5 @@ public interface Evaluable {
 //	protected Engine engine;
 //	protected Constructor constructor;
 
-	public int evaluate(String n, int pass, int y, int s, int a, int eng, String t, String c);
+	public int evaluate(Class<?> Class, String name, int passagers_nb, int year, int speed, int autonomy, int engine_nb, String type_engine, String constructor);
 }

@@ -1,8 +1,10 @@
 package planes;
 
+import java.util.HashSet;
+
 import planes.Others.*;
 
-public abstract class Plane implements Evaluable {
+public abstract class Plane implements Evaluable{
 	
 	protected String name;
 	protected int passagers_nb;
@@ -13,20 +15,24 @@ public abstract class Plane implements Evaluable {
 	protected Engine engine;
 	protected Constructor constructor;
 	
-	public Plane(String n, int pass, int y, int s, int a, int eng, String t, String c){
-		name = n;
-		passagers_nb = pass;
-		year = y;
-		speed = s;
-		autonomy = a;
-		engine_nb = eng;
-		engine = new Engine(t);
-		constructor = new Constructor(c);
+	public Plane(String name, int passengers_nb, int year, int speed, int autonomy, int engine_nb, String type_engine, String constructor){
+		this.name = name;
+		this.passagers_nb = passengers_nb;
+		this.year = year;
+		this.speed = speed;
+		this.autonomy = autonomy;
+		this.engine_nb = engine_nb;
+		this.engine = new Engine(type_engine);
+		this.constructor = new Constructor(constructor);
 	}
 	
-	public int evaluate(String n, int pass, int y, int s, int a, int eng, String t, String c){
+	public int evaluate(HashSet<Class<?>> Class, String name, int passengers_nb, int year, int speed, int autonomy, int engine_nb, String type_engine, String constructor){
 		int score=0;
-		// Do the evaluation of the criteria
+		
+		for(Class<?> c : Class){
+			// INSTANCIATION DE CLASSES ??
+		}
+		
 		return score;
 	}
 }

@@ -2,8 +2,8 @@ package planes.Military;
 
 public class Fighter extends Military {
 
-	public Fighter(String n, int pass, int y, int s, int a, int eng, String t, String c) {
-		super(n, pass, y, s, a, eng, t, c);
+	public Fighter(String name, int passengers_nb, int year, int speed, int autonomy, int engine_nb, String type_engine, String constructor) {
+		super(name, passengers_nb, year, speed, autonomy, engine_nb, type_engine, constructor);
 	}
 
 }
