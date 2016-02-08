@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import planes.User.GlobalConnector;
+import planes.User.User;
 
 /**
  * Controls the view screen
@@ -24,31 +26,25 @@ public class LoginController {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String sessionID = authorize();
-                if (sessionID != null) {
-                    loginManager.authenticated(sessionID);
+                User user = authorize();
+                if (user != null) {
+                    loginManager.authenticated(user);
                 }
             }
         });
     }
-
+   
     /**
      * Check authorization credentials.
      * <p>
      * If accepted, return a sessionID for the authorized session
      * otherwise, return null.
      */
-    private String authorize() {
-        return
-                "open".equals(user.getText()) && "sesame".equals(password.getText())
-                        ? generateSessionID()
-                        : null;
-    }
-
-    private static int sessionID = 0;
-
-    private String generateSessionID() {
-        sessionID++;
-        return "xyzzy - session " + sessionID;
+    private User authorize() {
+    	// BASE DE DONNES CONNEXION TIMEOUT
+//    	GlobalConnector gc = new GlobalConnector();
+//    	User userTest = new User(gc, user.getText(), password.getText());
+    	User userTest = new User(user.getText(), password.getText(), false);
+    	return userTest;
     }
 }

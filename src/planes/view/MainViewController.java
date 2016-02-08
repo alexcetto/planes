@@ -40,8 +40,8 @@ public class MainViewController {
 
     }
 
-    public void initSessionID(final LoginManager loginManager, String sessionID) {
-        sessionLabel.setText(sessionID);
+    public void initSessionID(final LoginManager loginManager, User user) {
+        sessionLabel.setText(user.getName());
         logoutButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
