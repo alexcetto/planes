@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import planes.Main;
-
 /**
  * Created by alexandrecetto on 12/12/2015.
  */
@@ -35,7 +33,10 @@ public class User {
 			rs = pstt.executeQuery();
 			if(rs.next()){
 				if(usrPass.equals(rs.getString("password"))) admin = rs.getBoolean("admin");
-				else System.out.println("Identifiant trouvé, mauvais mot de passe !");
+				else{
+					System.out.println("Identifiant trouvé, mauvais mot de passe !");
+					name = null;
+				}
             }else{
             	pstt = co.prepareStatement(
             			"INSERT INTO users VALUES('"+usrName+"','"+usrPass+"', 0)"

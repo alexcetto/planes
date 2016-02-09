@@ -1,45 +1,49 @@
 package planes;
 
-import java.util.HashSet;
-
-import planes.Others.*;
+import planes.Criterion.*;
 
 public abstract class Plane implements Evaluable{
 	
-	protected String name;
-	protected int passagers_nb;
-	protected int year;
-	protected int speed;
-	protected int autonomy;
-	protected int engine_nb;
-	protected Engine engine;
-	protected Constructor constructor;
+	protected Criterion criterion;
 	
-//	protected Constructor manufacturer;
-//	protected String model;
-//	protected Engine engine;
-//	protected TYPE/CATEGORIE;
-//	protected int engine_nb;
-//	protected int seat_nb;
-//	protected Weight weight;
-//	protected Speed speed;
-	
-	public Plane(String name, int passengers_nb, int year, int speed, int autonomy, int engine_nb, String type_engine, String constructor){
-		this.name = name;
-		this.passagers_nb = passengers_nb;
-		this.year = year;
-		this.speed = speed;
-		this.autonomy = autonomy;
-		this.engine_nb = engine_nb;
-		this.engine = new Engine(type_engine);
-		this.constructor = new Constructor(constructor);
+	public Plane(Manufacturer manufacturer, Model model, Engine engine, Engine_nb nb,
+			Capacity capacity, Weight weight, Speed speed, Price price){
+		this.criterion = new Criterion(manufacturer, model, engine, nb, capacity, weight, speed, price);
 	}
 	
-	public int evaluate(HashSet<Class<?>> Class, String name, int passengers_nb, int year, int speed, int autonomy, int engine_nb, String type_engine, String constructor){
-		int score=0;
-		
-		
-		
-		return score;
+	public int evaluate(Criterion userCriterion){
+		return criterion.evaluate(userCriterion);
+	}
+	
+	public Criteria getModel(){
+		return criterion.getModel();
+	}
+	
+	public Criteria getManufacturer(){
+		return criterion.getManufacturer();
+	}
+	
+	public Criteria getEngine(){
+		return criterion.getEngine();
+	}
+	
+	public Criteria getPrice(){
+		return criterion.getPrice();
+	}
+	
+	public Criteria getSpeed(){
+		return criterion.getSpeed();
+	}
+	
+	public Criteria getEngine_nb(){
+		return criterion.getEngine_nb();
+	}
+	
+	public Criteria getCapacity(){
+		return criterion.getCapacity();
+	}
+	
+	public Criteria getWeight(){
+		return criterion.getWeight();
 	}
 }
