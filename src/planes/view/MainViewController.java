@@ -37,7 +37,7 @@ public class MainViewController {
 
     public void initialize() {
         data.add(new Airliner("model", 5, 2012, 1000, 1000, 4, "3", "Airbus"));
-
+        
     }
 
     public void initSessionID(final LoginManager loginManager, User user) {
@@ -89,7 +89,7 @@ public class MainViewController {
                         data.add(new Airliner(rs.getString("model"), rs.getInt("no-seats"), 2012, rs.getInt("speed"), 1000, rs.getInt("no-eng"), ""+rs.getInt("type-eng"), rs.getString("mfr")));
                     }
                 }else{
-                    System.out.println("RequÃªte Ã©chouÃ©e !");
+                    System.out.println("Requête échouée !");
                 }
             } catch (SQLException ex) {
                 // TODO Auto-generated catch block

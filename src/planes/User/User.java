@@ -24,6 +24,8 @@ public class User {
     public User(GlobalConnector gc, String usrName, String usrPass){
 		PreparedStatement pstt;
 		ResultSet rs;
+		name = usrName;
+		mdp = usrPass;
 
 		Connection co = gc.getCo();
 		try {
@@ -32,21 +34,14 @@ public class User {
 					);
 			rs = pstt.executeQuery();
 			if(rs.next()){
-				if(usrPass.equals(rs.getString("password"))){
-					admin = rs.getBoolean("admin");
-				}else{
-					//
-					//	AFFICHAGE ERREUR CONNEXION
-					//
-				}
+				if(usrPass.equals(rs.getString("password"))) admin = rs.getBoolean("admin");
+				else System.out.println("Identifiant trouvé, mauvais mot de passe !");
             }else{
             	pstt = co.prepareStatement(
-            			"INSERT INTO users VALUES('"+usrName+"','"+usrPass+"')"
+            			"INSERT INTO users VALUES('"+usrName+"','"+usrPass+"', 0)"
             			);
             	rs = pstt.executeQuery();
-            	//
-            	//	AFFICHAGE CREATION USER
-            	//
+            	System.out.println("Création d'un nouvel utilisateur !");
             }
 		} catch (SQLException e) {	e.printStackTrace(); }
     }

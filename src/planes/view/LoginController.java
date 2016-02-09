@@ -42,9 +42,8 @@ public class LoginController {
      */
     private User authorize() {
     	// BASE DE DONNES CONNEXION TIMEOUT
-//    	GlobalConnector gc = new GlobalConnector();
-//    	User userTest = new User(gc, user.getText(), password.getText());
-    	User userTest = new User(user.getText(), password.getText(), false);
+    	GlobalConnector gc = new GlobalConnector();
+    	User userTest = new User(gc, user.getText(), password.getText());
     	return userTest;
     }
 }
