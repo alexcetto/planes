@@ -17,8 +17,19 @@ public class Capacity extends Criteria {
 	
 	@Override
 	public int evaluate(Criterion userCriterion) {
-		// TODO Auto-generated method stub
-		return 0;
+		Capacity userCapacity = (Capacity) userCriterion.getCapacity();
+		if(this.min_cap > userCapacity.getMin() && this.min_cap < userCapacity.getMax())
+			return 0;
+		else
+			return 100;
+	}
+	
+	public int getMin(){
+		return this.min_cap;
+	}
+	
+	public int getMax(){
+		return this.max_cap;
 	}
 
 	@Override

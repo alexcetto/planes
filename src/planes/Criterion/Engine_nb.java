@@ -10,8 +10,12 @@ public class Engine_nb extends Criteria {
 
 	@Override
 	public int evaluate(Criterion userCriterion) {
-		// TODO Auto-generated method stub
-		return 0;
+		Engine_nb userEngine_nb = (Engine_nb) userCriterion.getEngine_nb();
+		return Math.abs(this.nb - userEngine_nb.getEngine_nb())*100/userEngine_nb.getEngine_nb();
+	}
+	
+	public int getEngine_nb(){
+		return this.nb;
 	}
 
 	@Override

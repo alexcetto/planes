@@ -139,14 +139,5 @@ public class MainViewController {
         tableProducts.setItems(data);
         tableProducts.getColumns().addAll(model, mfr, engine, engine_nb, capacity, speed, weight, price);
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }

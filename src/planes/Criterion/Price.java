@@ -10,8 +10,12 @@ public class Price extends Criteria {
 	
 	@Override
 	public int evaluate(Criterion userCriterion) {
-		// TODO Auto-generated method stub
-		return 0;
+		Price userPrice = (Price) userCriterion.getPrice();
+		return Math.abs(this.price - userPrice.getPrice())*100/userPrice.getPrice();
+	}
+	
+	public int getPrice(){
+		return this.price;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package planes.Criterion;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import planes.Evaluable;
 
@@ -24,7 +25,7 @@ public class Criterion extends Criteria implements Evaluable {
 	@Override
 	public int evaluate(Criterion userCriterion) {
 		int score = 0;
-//		for(Criteria c : criterion) score += c.evaluate(userCriterion);
+		for(Entry<String, Criteria> c : criterion.entrySet()) score += c.getValue().evaluate(userCriterion);
 		return score;
 	}
 	

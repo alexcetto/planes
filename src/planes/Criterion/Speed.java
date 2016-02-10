@@ -10,8 +10,12 @@ public class Speed extends Criteria {
 	
 	@Override
 	public int evaluate(Criterion userCriterion) {
-		// TODO Auto-generated method stub
-		return 0;
+		Speed userSpeed = (Speed) userCriterion.getSpeed();
+		return Math.abs(this.speed - userSpeed.getSpeed())*100/userSpeed.getSpeed();
+	}
+	
+	public int getSpeed(){
+		return this.speed;
 	}
 
 	@Override

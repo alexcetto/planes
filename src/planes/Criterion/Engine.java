@@ -3,9 +3,11 @@ package planes.Criterion;
 public class Engine extends Criteria {
 	
 	private String type;
+	private int type_nb;
 
 	public Engine(int type) {
-		switch(type){
+		type_nb = type;
+		switch(type_nb){
 		case 1:
 			this.type = "Reciprocating";
 			break;
