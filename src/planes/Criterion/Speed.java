@@ -14,7 +14,7 @@ public class Speed extends Criteria {
 	public int evaluate(Plane userPlane) {
 		Speed userSpeed = (Speed) userPlane.getSpeed();
 		
-		return (Math.abs(userSpeed.getSpeed()-this.speed)*100)/userSpeed.getSpeed();
+		return Ponderation.SPEED * (Math.abs(userSpeed.getSpeed()-speed)*100)/userSpeed.getSpeed();
 	}
 	
 	public int getSpeed(){

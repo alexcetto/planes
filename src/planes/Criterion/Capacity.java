@@ -20,12 +20,12 @@ public class Capacity extends Criteria {
 	@Override
 	public int evaluate(Plane userPlane) {
 		Capacity userCapacity = (Capacity) userPlane.getCapacity();
-		if(this.min_cap >= userCapacity.getMin() && this.min_cap <= userCapacity.getMax())
+		if(min_cap >= userCapacity.getMin() && min_cap <= userCapacity.getMax())
 			return 0;
-		else if(this.min_cap < userCapacity.getMin()){
-			return (Math.abs(userCapacity.getMin()-this.min_cap)*100)/userCapacity.getMin();
+		else if(min_cap < userCapacity.getMin()){
+			return Ponderation.CAPACITY * (Math.abs(userCapacity.getMin()-min_cap)*100)/userCapacity.getMin();
 		} else {
-			return (Math.abs(userCapacity.getMax()-this.min_cap)*100)/userCapacity.getMax();
+			return Ponderation.CAPACITY * (Math.abs(userCapacity.getMax()-min_cap)*100)/userCapacity.getMax();
 		}
 			
 	}

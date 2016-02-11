@@ -12,7 +12,10 @@ public class Model extends Criteria {
 	
 	@Override
 	public int evaluate(Plane userPlane) {
-		return -1;
+		if(name.contains(userPlane.getModel().toString()))
+			return 0;
+		else
+			return Ponderation.MODEL * 100;
 	}
 
 	@Override

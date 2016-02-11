@@ -4,6 +4,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planes.view.MainViewController">
     <center>
@@ -60,7 +61,17 @@
                     </padding>
                 </Label>
                 <TextField fx:id="speedInput" layoutX="255.0" layoutY="10.0" />
-                <ChoiceBox prefWidth="150.0" />
+                <ChoiceBox fx:id="weightInput" prefWidth="150.0" value="Weight not defined">
+                	<items>
+				        <FXCollections fx:factory="observableArrayList">
+				            <String fx:value="Weight not defined" />
+				            <String fx:value="CLASS 1" />
+				            <String fx:value="CLASS 2" />
+				            <String fx:value="CLASS 3" />
+				            <String fx:value="CLASS 4" />
+				        </FXCollections>
+				    </items>
+                </ChoiceBox>
                 <Button fx:id="submitCriterion" mnemonicParsing="false" text="Valider" />
             </children>
         </FlowPane>

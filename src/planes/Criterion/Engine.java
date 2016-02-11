@@ -47,7 +47,10 @@ public class Engine extends Criteria {
 
 	@Override
 	public int evaluate(Plane userPlane) {
-		return -1;
+		if(type.equals(userPlane.getEngine().toString()))
+			return 0;
+		else
+			return Ponderation.ENGINE * 100;
 	}
 
 	@Override

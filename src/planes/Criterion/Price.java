@@ -14,7 +14,7 @@ public class Price extends Criteria {
 	public int evaluate(Plane userPlane) {
 		Price userPrice = (Price) userPlane.getPrice();
 		
-		return (Math.abs(userPrice.getPrice()-this.price)*100)/userPrice.getPrice();
+		return Ponderation.PRICE * (Math.abs(userPrice.getPrice()-price)*100)/userPrice.getPrice();
 	}
 	
 	public int getPrice(){

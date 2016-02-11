@@ -16,7 +16,7 @@ public class Manufacturer extends Criteria {
 		if(name.contains(mfrUser.toString()))
 			return 0;
 		else
-			return 200;
+			return Ponderation.MANUFACTURER * 100;
 	}
 
 	@Override

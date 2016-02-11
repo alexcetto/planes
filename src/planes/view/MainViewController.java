@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,21 +45,10 @@ public class MainViewController {
     private TextField engine_nbInput;
     @FXML
     private TextField speedInput;
+    @FXML
+    private ChoiceBox<String> weightInput;
     
     private ObservableList<Plane> data = FXCollections.observableArrayList();
-
-    public void initialize() {
-    	data.add(new Airliner(
-    			new Manufacturer("Airbus"),
-    			new Model("A380"),
-    			new Engine(10),
-    			new Engine_nb(2),
-    			new Capacity(3),
-    			new Weight("CLASS 3"),
-    			new Speed(666),
-    			new Price(123456)
-    		));     
-    }
 
 	@SuppressWarnings("unchecked")
 	public void initSessionID(final LoginManager loginManager, User user) {
@@ -162,7 +152,7 @@ public class MainViewController {
         			new Engine(4),
         			new Engine_nb(Integer.parseInt(engine_nbInput.getText())),
         			new Capacity(500, 1000),
-        			new Weight("CLASS 2"),
+        			new Weight((String) weightInput.getValue()),
         			new Speed(Integer.parseInt(speedInput.getText())),
         			new Price(123456)
         		);
@@ -187,7 +177,6 @@ public class MainViewController {
                         //		TRAITEMENT EN FONCTION DU RETURN
                         if(score < 50){
                         	data.add(compared);
-//                        	System.out.println(compared.getModel().toString() + " : " + score);
                         	i++;
                         }
                     }
