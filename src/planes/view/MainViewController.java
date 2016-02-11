@@ -167,12 +167,12 @@ public class MainViewController {
                     		);
                         int score = compared.evaluate(userPlane);
                         //		TRAITEMENT EN FONCTION DU RETURN
-                        if(score < 50){
+                        if(score > 50){
                         	data.add(compared);
                         	i++;
                         }
                     }
-                    System.out.println(i + "r�sultats affich�s");
+                    System.out.println(i + " résultats affichés.");
                 }else{
                     System.out.println("Requ�te �chou�e !");
                 }

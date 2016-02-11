@@ -20,10 +20,14 @@ public class Weight extends Criteria {
 
 	@Override
 	public int evaluate(Plane userPlane) {
-		if(weight.equals(userPlane.getWeight().toString()))
-			return 0;
-		else
-			return Ponderation.WEIGHT * 100;
+		if(weight.equals("") || userPlane.getWeight().toString().equals(""))
+			return -1;
+		else {
+			if(weight.equals(userPlane.getWeight().toString()))
+				return 0;
+			else
+				return Ponderation.WEIGHT * 100;
+		}
 	}
 
 	@Override

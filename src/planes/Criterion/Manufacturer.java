@@ -12,11 +12,14 @@ public class Manufacturer extends Criteria {
 	
 	@Override
 	public int evaluate(Plane userPlane) {
-		Manufacturer mfrUser = (Manufacturer) userPlane.getManufacturer();
-		if(name.contains(mfrUser.toString()))
-			return 0;
-		else
-			return Ponderation.MANUFACTURER * 100;
+		if(name.equals("") || userPlane.getManufacturer().toString().equals(""))
+			return -1;
+		else {
+			if(name.contains(userPlane.getManufacturer().toString()))
+				return 0;
+			else
+				return Ponderation.MANUFACTURER * 100;
+		}
 	}
 
 	@Override

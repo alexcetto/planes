@@ -13,8 +13,10 @@ public class Price extends Criteria {
 	@Override
 	public int evaluate(Plane userPlane) {
 		Price userPrice = (Price) userPlane.getPrice();
-		
-		return Ponderation.PRICE * (Math.abs(userPrice.getPrice()-price)*100)/userPrice.getPrice();
+		if(price==0 || userPrice.getPrice()==0)
+			return -1;
+		else
+			return Ponderation.PRICE * (Math.abs(userPrice.getPrice()-price)*100)/userPrice.getPrice();
 	}
 	
 	public int getPrice(){

@@ -16,7 +16,7 @@ public class Plane implements Evaluable{
 	}
 	
 	public int evaluate(Plane userPlane){
-		return criterion.evaluate(userPlane);
+		return 100 - criterion.evaluate(userPlane);
 	}
 	
 	public Criteria getModel(){

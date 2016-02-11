@@ -7,6 +7,9 @@ public class Engine extends Criteria {
 	private String type;
 	private int type_nb;
 
+	/**
+	 * @param type Type d'Engine tel que noté dans la BDD (converti en string équivoque)
+	 */
 	public Engine(int type) {
 		type_nb = type;
 		switch(type_nb){
@@ -47,10 +50,14 @@ public class Engine extends Criteria {
 
 	@Override
 	public int evaluate(Plane userPlane) {
-		if(type.equals(userPlane.getEngine().toString()))
-			return 0;
-		else
-			return Ponderation.ENGINE * 100;
+		if(type.equals("") || userPlane.getEngine().toString().equals(""))
+			return -1;
+		else {
+			if(type.equals(userPlane.getEngine().toString()))
+				return 0;
+			else
+				return Ponderation.ENGINE * 100;
+		}
 	}
 
 	@Override

@@ -23,6 +23,14 @@ public class Criterion extends Criteria implements Evaluable {
 		criterion.put("price", price);
 	}
 
+	
+	/* 
+	 * @param userPlane		Modèle de comparaison créé par l'user
+	 * @return				Pourcentage d'écart moyen à userPlane
+	 * 
+	 * Appelle evaluate() pour chaque critère dans criterion
+	 * Si le critère renvoie -1, il est ignoré (manque d'information)
+	 */
 	@Override
 	public int evaluate(Plane userPlane) {
 		int totalScore=0, score, index=0;
