@@ -13,8 +13,10 @@ public class Engine_nb extends Criteria {
 	@Override
 	public int evaluate(Plane userPlane) {
 		Engine_nb userEngine_nb = (Engine_nb) userPlane.getEngine_nb();
-		
-		return (Math.abs(userEngine_nb.getEngine_nb()-nb)*100)/userEngine_nb.getEngine_nb();
+		if (userEngine_nb.getEngine_nb() == 0)
+			return 0;
+		else
+			return (Math.abs(userEngine_nb.getEngine_nb()-nb)*100)/userEngine_nb.getEngine_nb();
 	}
 	
 	public int getEngine_nb(){

@@ -13,8 +13,10 @@ public class Speed extends Criteria {
 	@Override
 	public int evaluate(Plane userPlane) {
 		Speed userSpeed = (Speed) userPlane.getSpeed();
-		
-		return Ponderation.SPEED * (Math.abs(userSpeed.getSpeed()-speed)*100)/userSpeed.getSpeed();
+		if(userSpeed.getSpeed() == 0)
+			return 0;
+		else
+			return Ponderation.SPEED * (Math.abs(userSpeed.getSpeed()-speed)*100)/userSpeed.getSpeed();
 	}
 	
 	public int getSpeed(){

@@ -27,26 +27,17 @@ import java.sql.SQLException;
  * Controls the main application screen
  */
 public class MainViewController {
-    @FXML
-    private Button logoutButton;
-    @FXML
-    private Label sessionLabel;
-    @FXML
-    private TableView<Plane> tableProducts;
-    @FXML
-    private Button addProducts;
-    @FXML
-    private Button submitCriterion;
-    @FXML
-    private TextField modelInput;
-    @FXML
-    private TextField mfrInput;
-    @FXML
-    private TextField engine_nbInput;
-    @FXML
-    private TextField speedInput;
-    @FXML
-    private ChoiceBox<String> weightInput;
+    @FXML private Button logoutButton;
+    @FXML private Label sessionLabel;
+    @FXML private TableView<Plane> tableProducts;
+    @FXML private Button addProducts;
+    @FXML private Button submitCriterion;
+    @FXML private TextField modelInput;
+    @FXML private TextField mfrInput;
+    @FXML private ChoiceBox engine_nbInput;
+    @FXML private TextField speedInput;
+    @FXML private ChoiceBox<String> weightInput;
+
     
     private ObservableList<Plane> data = FXCollections.observableArrayList();
 
@@ -128,7 +119,7 @@ public class MainViewController {
                     		));
                     }
                 }else{
-                    System.out.println("Requête échouée !");
+                    System.out.println("Requï¿½te ï¿½chouï¿½e !");
                 }
             } catch (SQLException ex) {
                 // TODO Auto-generated catch block
@@ -146,11 +137,12 @@ public class MainViewController {
 			//            RECUPERATION DES CHOIX DE TYPE AVION
 			//            CREATION OBJETS CLASSES CHOISIES
             //			  A REFAIRE ! ATTENTION !
+
             Plane userPlane = new Plane(
             		new Manufacturer(mfrInput.getText()),
             		new Model(modelInput.getText()),
         			new Engine(4),
-        			new Engine_nb(Integer.parseInt(engine_nbInput.getText())),
+        			new Engine_nb(Integer.parseInt(engine_nbInput.getSelectionModel().getSelectedItem().toString())),
         			new Capacity(500, 1000),
         			new Weight((String) weightInput.getValue()),
         			new Speed(Integer.parseInt(speedInput.getText())),
@@ -180,9 +172,9 @@ public class MainViewController {
                         	i++;
                         }
                     }
-                    System.out.println(i + "résultats affichés");
+                    System.out.println(i + "rï¿½sultats affichï¿½s");
                 }else{
-                    System.out.println("Requête échouée !");
+                    System.out.println("Requï¿½te ï¿½chouï¿½e !");
                 }
             } catch (SQLException ex) {
                 // TODO Auto-generated catch block
