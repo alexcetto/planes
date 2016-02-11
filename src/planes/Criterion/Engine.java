@@ -1,5 +1,7 @@
 package planes.Criterion;
 
+import planes.Plane;
+
 public class Engine extends Criteria {
 	
 	private String type;
@@ -44,13 +46,12 @@ public class Engine extends Criteria {
 	}
 
 	@Override
-	public String toString() {
-		return type;
+	public int evaluate(Plane userPlane) {
+		return -1;
 	}
 
 	@Override
-	public int evaluate(Criterion userCriterion) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String toString() {
+		return type;
 	}
 }

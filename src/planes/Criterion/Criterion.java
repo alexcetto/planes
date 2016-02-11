@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import planes.Evaluable;
+import planes.Plane;
 
 public class Criterion extends Criteria implements Evaluable {
 
@@ -23,10 +24,16 @@ public class Criterion extends Criteria implements Evaluable {
 	}
 
 	@Override
-	public int evaluate(Criterion userCriterion) {
-		int score = 0;
-		for(Entry<String, Criteria> c : criterion.entrySet()) score += c.getValue().evaluate(userCriterion);
-		return score;
+	public int evaluate(Plane userPlane) {
+		int totalScore=0, score, index=0;
+		for(Entry<String, Criteria> c : criterion.entrySet()){
+			score = c.getValue().evaluate(userPlane);
+			if(score!=-1){
+				totalScore += score;
+				index++;
+			}
+		}
+		return index!=0 ? totalScore/index : 0;
 	}
 	
 	public Criteria getModel(){

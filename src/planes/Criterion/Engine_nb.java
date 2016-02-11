@@ -1,5 +1,7 @@
 package planes.Criterion;
 
+import planes.Plane;
+
 public class Engine_nb extends Criteria {
 	
 	private int nb;
@@ -9,9 +11,10 @@ public class Engine_nb extends Criteria {
 	}
 
 	@Override
-	public int evaluate(Criterion userCriterion) {
-		Engine_nb userEngine_nb = (Engine_nb) userCriterion.getEngine_nb();
-		return Math.abs(this.nb - userEngine_nb.getEngine_nb())*100/userEngine_nb.getEngine_nb();
+	public int evaluate(Plane userPlane) {
+		Engine_nb userEngine_nb = (Engine_nb) userPlane.getEngine_nb();
+		
+		return (Math.abs(userEngine_nb.getEngine_nb()-this.nb)*100)/userEngine_nb.getEngine_nb();
 	}
 	
 	public int getEngine_nb(){

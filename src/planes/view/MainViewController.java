@@ -9,8 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import planes.Airliner;
+import planes.Civil.Airliner;
 import planes.Plane;
 import planes.Criterion.*;
 import planes.User.GlobalConnector;
@@ -33,6 +34,17 @@ public class MainViewController {
     private TableView<Plane> tableProducts;
     @FXML
     private Button addProducts;
+    @FXML
+    private Button submitCriterion;
+    @FXML
+    private TextField modelInput;
+    @FXML
+    private TextField mfrInput;
+    @FXML
+    private TextField engine_nbInput;
+    @FXML
+    private TextField speedInput;
+    
     private ObservableList<Plane> data = FXCollections.observableArrayList();
 
     public void initialize() {
@@ -101,7 +113,6 @@ public class MainViewController {
                 new PropertyValueFactory<>("price"));
 
 
-
         addProducts.setOnAction((ActionEvent e) -> {
             GlobalConnector gc = new GlobalConnector();
             Connection co = gc.getCo();
@@ -126,6 +137,61 @@ public class MainViewController {
                     			new Price(123456)
                     		));
                     }
+                }else{
+                    System.out.println("Requête échouée !");
+                }
+            } catch (SQLException ex) {
+                // TODO Auto-generated catch block
+                ex.printStackTrace();
+            }
+
+        });
+        
+        submitCriterion.setOnAction((ActionEvent e) -> {
+            GlobalConnector gc = new GlobalConnector();
+            Connection co = gc.getCo();
+            PreparedStatement pstt;
+            ResultSet rs;
+            
+			//            RECUPERATION DES CHOIX DE TYPE AVION
+			//            CREATION OBJETS CLASSES CHOISIES
+            //			  A REFAIRE ! ATTENTION !
+            Plane userPlane = new Plane(
+            		new Manufacturer(mfrInput.getText()),
+            		new Model(modelInput.getText()),
+        			new Engine(4),
+        			new Engine_nb(Integer.parseInt(engine_nbInput.getText())),
+        			new Capacity(500, 1000),
+        			new Weight("CLASS 2"),
+        			new Speed(Integer.parseInt(speedInput.getText())),
+        			new Price(123456)
+        		);
+
+            try {
+                pstt = co.prepareStatement( "SELECT * FROM plane " + userPlane.getStatement() + ";" );
+                rs = pstt.executeQuery();
+                if(rs.next()){
+                	int i=0;
+                    while (rs.next()){
+                        Plane compared = new Plane(
+                        		new Manufacturer(rs.getString("mfr")),
+                        		new Model(rs.getString("model")),
+                    			new Engine(rs.getInt("type-eng")),
+                    			new Engine_nb(rs.getInt("no-eng")),
+                    			new Capacity(rs.getInt("no-seats")),
+                    			new Weight(rs.getString("ac-weight")),
+                    			new Speed(rs.getInt("speed")),
+                    			new Price(100000)
+                    		);
+                        int score = compared.evaluate(userPlane);
+                        //		TRAITEMENT EN FONCTION DU RETURN
+                        if(score < 50){
+                        	data.add(compared);
+//                        	System.out.println(compared.getModel().toString() + " : " + score);
+                        	i++;
+                        }
+                    }
+                    System.out.println(i + "résultats affichés");
                 }else{
                     System.out.println("Requête échouée !");
                 }

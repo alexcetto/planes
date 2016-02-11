@@ -1,5 +1,7 @@
 package planes.Criterion;
 
+import planes.Plane;
+
 public class Price extends Criteria {
 
 	private int price;
@@ -9,9 +11,10 @@ public class Price extends Criteria {
 	}
 	
 	@Override
-	public int evaluate(Criterion userCriterion) {
-		Price userPrice = (Price) userCriterion.getPrice();
-		return Math.abs(this.price - userPrice.getPrice())*100/userPrice.getPrice();
+	public int evaluate(Plane userPlane) {
+		Price userPrice = (Price) userPlane.getPrice();
+		
+		return (Math.abs(userPrice.getPrice()-this.price)*100)/userPrice.getPrice();
 	}
 	
 	public int getPrice(){

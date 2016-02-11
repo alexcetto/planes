@@ -1,5 +1,7 @@
 package planes.Criterion;
 
+import planes.Plane;
+
 public class Speed extends Criteria {
 
 	private int speed;
@@ -9,9 +11,10 @@ public class Speed extends Criteria {
 	}
 	
 	@Override
-	public int evaluate(Criterion userCriterion) {
-		Speed userSpeed = (Speed) userCriterion.getSpeed();
-		return Math.abs(this.speed - userSpeed.getSpeed())*100/userSpeed.getSpeed();
+	public int evaluate(Plane userPlane) {
+		Speed userSpeed = (Speed) userPlane.getSpeed();
+		
+		return (Math.abs(userSpeed.getSpeed()-this.speed)*100)/userSpeed.getSpeed();
 	}
 	
 	public int getSpeed(){

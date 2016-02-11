@@ -2,7 +2,7 @@ package planes;
 
 import planes.Criterion.*;
 
-public abstract class Plane implements Evaluable{
+public class Plane implements Evaluable{	
 	
 	protected Criterion criterion;
 	
@@ -11,8 +11,12 @@ public abstract class Plane implements Evaluable{
 		this.criterion = new Criterion(manufacturer, model, engine, nb, capacity, weight, speed, price);
 	}
 	
-	public int evaluate(Criterion userCriterion){
-		return criterion.evaluate(userCriterion);
+	public String getStatement(){
+		return "";
+	}
+	
+	public int evaluate(Plane userPlane){
+		return criterion.evaluate(userPlane);
 	}
 	
 	public Criteria getModel(){

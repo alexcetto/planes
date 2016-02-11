@@ -1,5 +1,7 @@
 package planes.Criterion;
 
+import planes.Plane;
+
 public class Manufacturer extends Criteria {
 
 	private String name;
@@ -9,9 +11,12 @@ public class Manufacturer extends Criteria {
 	}
 	
 	@Override
-	public int evaluate(Criterion userCriterion) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int evaluate(Plane userPlane) {
+		Manufacturer mfrUser = (Manufacturer) userPlane.getManufacturer();
+		if(name.contains(mfrUser.toString()))
+			return 0;
+		else
+			return 200;
 	}
 
 	@Override

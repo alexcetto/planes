@@ -1,5 +1,7 @@
 package planes.Criterion;
 
+import planes.Plane;
+
 public class Model extends Criteria {
 
 	private String name;
@@ -9,9 +11,8 @@ public class Model extends Criteria {
 	}
 	
 	@Override
-	public int evaluate(Criterion userCriterion) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int evaluate(Plane userPlane) {
+		return -1;
 	}
 
 	@Override
