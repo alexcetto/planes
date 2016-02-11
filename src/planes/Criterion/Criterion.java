@@ -37,6 +37,7 @@ public class Criterion extends Criteria implements Evaluable {
 		for(Entry<String, Criteria> c : criterion.entrySet()){
 			score = c.getValue().evaluate(userPlane);
 			if(score!=-1){
+				System.out.println(c.getKey());
 				totalScore += score;
 				index++;
 			}

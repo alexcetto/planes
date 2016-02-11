@@ -22,51 +22,70 @@
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
     <bottom>
-        <FlowPane prefHeight="21.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label text="Session User : " />
-                <Label fx:id="sessionLabel" text="Undefined" />
-                <Button id="loginButton" fx:id="logoutButton" mnemonicParsing="false" text="Logout" BorderPane.alignment="CENTER" />
-                <Button fx:id="addProducts" mnemonicParsing="false" text="Add Products" textAlignment="CENTER" />
-            </children>
-        </FlowPane>
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="200.0" prefWidth="500.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+              <FlowPane prefHeight="25.0" prefWidth="350.0" BorderPane.alignment="CENTER" GridPane.columnIndex="1">
+                  <children>
+                      <Label text="Session User : ">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding></Label>
+                      <Label fx:id="sessionLabel" text="Undefined">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </Label>
+                  </children>
+              </FlowPane>
+                <Button fx:id="adminButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Admin" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" />
+                <Button id="loginButton" fx:id="logoutButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Logout" />
+         </children>
+      </GridPane>
     </bottom>
     <top>
         <GridPane hgap="10" vgap="10">
             <padding><Insets bottom="10" left="10" right="10" top="10" /></padding>
             <children>
                 <TextField fx:id="mfrInput" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label text="Model" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                <TextField fx:id="modelInput" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <Label text="Model" GridPane.columnIndex="2" />
+                <TextField fx:id="modelInput" GridPane.columnIndex="3" />
 
-                <Label text="Engine number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <ChoiceBox fx:id="engine_nbInput" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label text="Engine number" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="engine_nbInput" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="1" />
-                            <String fx:value="2" />
-                            <String fx:value="3" />
-                            <String fx:value="4" />
-                            <String fx:value="5" />
-                            <String fx:value="6" />
-                            <String fx:value="8" />
-                            <String fx:value="10" />
-                            <String fx:value="12" />
+                            <Integer fx:value="1" />
+                            <Integer fx:value="2" />
+                            <Integer fx:value="3" />
+                            <Integer fx:value="4" />
+                            <Integer fx:value="5" />
+                            <Integer fx:value="6" />
+                            <Integer fx:value="8" />
+                            <Integer fx:value="10" />
+                            <Integer fx:value="12" />
                         </FXCollections>
                     </items>
                 </ChoiceBox>
 
-                <Label text="Speed" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <Label text="Speed" GridPane.rowIndex="3">
                     <padding>
                         <Insets right="5.0" />
                     </padding>
                 </Label>
                 <TextField fx:id="speedInput" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <ChoiceBox fx:id="weightInput" prefWidth="150.0" value="Weight not defined" GridPane.columnIndex="3" GridPane.rowIndex="3">
+				<Label text="Weight" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <ChoiceBox fx:id="weightInput" prefHeight="25.0" prefWidth="90.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Weight not defined" />
                             <String fx:value="CLASS 1" />
                             <String fx:value="CLASS 2" />
                             <String fx:value="CLASS 3" />
@@ -75,30 +94,38 @@
                     </items>
                 </ChoiceBox>
 
-                <Button fx:id="submitCriterion" defaultButton="true" mnemonicParsing="false" text="Valider" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Button fx:id="submitCriterion" defaultButton="true" mnemonicParsing="false" text="Submit" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <Label text="Manufacturer" />
             <Label text="Min Price" GridPane.rowIndex="1" />
             <Slider GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label layoutX="20.0" layoutY="62.0" text="Max Price" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Slider layoutX="111.0" layoutY="63.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="engineType" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            
+            <Label text="Engine" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="engineInput" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <items>
                   <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Define Engine" />
-                     <String fx:value="CLASS 1" />
-                     <String fx:value="CLASS 2" />
-                     <String fx:value="CLASS 3" />
-                     <String fx:value="CLASS 4" />
+                     <String fx:value="Reciprocating" />
+                     <String fx:value="Turbo-prop" />
+                     <String fx:value="Turbo-shaft" />
+                     <String fx:value="Turbo-jet" />
+                     <String fx:value="Turbo-fan" />
+                     <String fx:value="Ramjet" />
+                     <String fx:value="2 Cycle" />
+                     <String fx:value="4 Cycle" />
+                     <String fx:value="Electric" />
+                     <String fx:value="Rotary" />
                   </FXCollections>
                </items>
             </ChoiceBox>
             </children>
             <columnConstraints>
-                <ColumnConstraints />
-                <ColumnConstraints maxWidth="169.0" minWidth="147.0" prefWidth="147.0" />
-                <ColumnConstraints maxWidth="94.0" minWidth="57.0" prefWidth="58.0" />
-                <ColumnConstraints maxWidth="146.0" minWidth="110.0" prefWidth="146.0" />
-            <ColumnConstraints maxWidth="146.0" minWidth="110.0" prefWidth="146.0" />
+                <ColumnConstraints maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
+                <ColumnConstraints maxWidth="140.0" minWidth="140.0" prefWidth="140.0" />
+                <ColumnConstraints maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
+                <ColumnConstraints maxWidth="140.0" minWidth="140.0" prefWidth="140.0" />
+            <ColumnConstraints maxWidth="75.0" minWidth="75.0" prefWidth="75.0" />
+            <ColumnConstraints maxWidth="75.0" minWidth="75.0" prefWidth="75.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints vgrow="ALWAYS" />

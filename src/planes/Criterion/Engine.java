@@ -1,56 +1,40 @@
 package planes.Criterion;
 
+import java.util.Arrays;
+import java.util.List;
+
 import planes.Plane;
 
 public class Engine extends Criteria {
 	
+	private static List<String> types = Arrays.asList("-", "Reciprocating", "Turbo-prop", "Turbo-shaft", "Turbo-jet", "Turbo-fan", 
+			"Ramjet", "2 Cycle", "4 Cycle", "Unknown", "Electric", "Rotary");
+	
 	private String type;
-	private int type_nb;
 
 	/**
 	 * @param type Type d'Engine tel que noté dans la BDD (converti en string équivoque)
 	 */
 	public Engine(int type) {
-		type_nb = type;
-		switch(type_nb){
-		case 1:
-			this.type = "Reciprocating";
-			break;
-		case 2:
-			this.type = "Turbo-prop";
-			break;
-		case 3:
-			this.type = "Turbo-shaft";
-			break;
-		case 4:
-			this.type = "Turbo-jet";
-			break;
-		case 5:
-			this.type = "Turbo-fan";
-			break;
-		case 6:
-			this.type = "Ramjet";
-			break;
-		case 7:
-			this.type = "2 Cycle";
-			break;
-		case 8:
-			this.type = "4 Cycle";
-			break;
-		case 10:
-			this.type = "Electric";
-			break;
-		case 11:
-			this.type = "Rotary";
-			break;
-		default:
-			this.type = "-";
-		}
+		if(type<0 || type>=types.size() || type==9)
+			this.type = types.get(0);
+		else
+			this.type = types.get(type);
+	}
+	
+	/**
+	 * @param type Type d'Engine associé aux types de la BDD
+	 */
+	public Engine(String type){
+		if(type!=null && types.contains(type))
+			this.type = type;
+		else
+			this.type = types.get(0);
 	}
 
 	@Override
 	public int evaluate(Plane userPlane) {
-		if(type.equals("") || userPlane.getEngine().toString().equals(""))
+		if(type.equals("-") || userPlane.getEngine().toString().equals("-"))
 			return -1;
 		else {
 			if(type.equals(userPlane.getEngine().toString()))

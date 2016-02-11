@@ -12,7 +12,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import planes.Civil.Airliner;
 import planes.Plane;
 import planes.Criterion.*;
 import planes.User.GlobalConnector;
@@ -30,19 +29,22 @@ public class MainViewController {
     @FXML private Button logoutButton;
     @FXML private Label sessionLabel;
     @FXML private TableView<Plane> tableProducts;
-    @FXML private Button addProducts;
+    @FXML private Button adminButton;
     @FXML private Button submitCriterion;
     @FXML private TextField modelInput;
     @FXML private TextField mfrInput;
-    @FXML private ChoiceBox engine_nbInput;
+    @FXML private ChoiceBox<Integer> engine_nbInput;
     @FXML private TextField speedInput;
     @FXML private ChoiceBox<String> weightInput;
+    @FXML private ChoiceBox<String> engineInput;
 
     
     private ObservableList<Plane> data = FXCollections.observableArrayList();
 
 	@SuppressWarnings("unchecked")
 	public void initSessionID(final LoginManager loginManager, User user) {
+		if(user.isAdmin())
+			adminButton.setVisible(true);
         sessionLabel.setText(user.getName());
         logoutButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -54,7 +56,7 @@ public class MainViewController {
         tableProducts.setEditable(true);
 
         TableColumn <Plane,Criteria> mfr = new TableColumn<>("Manufacturer");
-        mfr.setMinWidth(100);
+        mfr.setMinWidth(150);
         mfr.setCellValueFactory(
                 new PropertyValueFactory<>("manufacturer"));
 
@@ -65,67 +67,45 @@ public class MainViewController {
 
         TableColumn <Plane,Criteria> engine = new TableColumn<>("Engine");
         engine.setMinWidth(100);
+        engine.setMaxWidth(100);
         engine.setCellValueFactory(
                 new PropertyValueFactory<>("engine"));
         
-        TableColumn <Plane,Criteria> engine_nb = new TableColumn<>("Engine number");
+        TableColumn <Plane,Criteria> engine_nb = new TableColumn<>("Number");
         engine_nb.setMinWidth(100);
+        engine_nb.setMaxWidth(100);
         engine_nb.setCellValueFactory(
                 new PropertyValueFactory<>("engine_nb"));
 
         TableColumn <Plane,Criteria> capacity = new TableColumn<>("Capacity");
-        capacity.setMinWidth(100);
+        capacity.setMinWidth(75);
+        capacity.setMaxWidth(75);
         capacity.setCellValueFactory(
                 new PropertyValueFactory<>("capacity"));
 
         TableColumn <Plane,Criteria> weight = new TableColumn<>("Weight");
-        weight.setMinWidth(100);
+        weight.setMinWidth(50);
+        weight.setMaxWidth(50);
         weight.setCellValueFactory(
                 new PropertyValueFactory<>("weight"));
 
         TableColumn <Plane,Criteria> speed = new TableColumn<>("Speed");
-        speed.setMinWidth(100);
+        speed.setMinWidth(50);
+        speed.setMaxWidth(50);
         speed.setCellValueFactory(
                 new PropertyValueFactory<>("speed"));
 
         TableColumn <Plane,Criteria> price = new TableColumn<>("Price");
-        price.setMinWidth(100);
+        price.setMinWidth(50);
+        price.setMaxWidth(50);
         price.setCellValueFactory(
                 new PropertyValueFactory<>("price"));
 
 
-        addProducts.setOnAction((ActionEvent e) -> {
-            GlobalConnector gc = new GlobalConnector();
-            Connection co = gc.getCo();
-            PreparedStatement pstt;
-            ResultSet rs;
-
-            try {
-                pstt = co.prepareStatement(
-                        "SELECT * FROM plane;"
-                );
-                rs = pstt.executeQuery();
-                if(rs.next()){
-                    while (rs.next()){
-                        data.add(new Airliner(
-                        		new Manufacturer(rs.getString("mfr")),
-                        		new Model(rs.getString("model")),
-                    			new Engine(rs.getInt("type-eng")),
-                    			new Engine_nb(rs.getInt("no-eng")),
-                    			new Capacity(rs.getInt("no-seats")),
-                    			new Weight(rs.getString("ac-weight")),
-                    			new Speed(rs.getInt("speed")),
-                    			new Price(123456)
-                    		));
-                    }
-                }else{
-                    System.out.println("Requ�te �chou�e !");
-                }
-            } catch (SQLException ex) {
-                // TODO Auto-generated catch block
-                ex.printStackTrace();
-            }
-
+        adminButton.setOnAction((ActionEvent e) -> {
+            //			OUVERTURE D'UNE FENETRE DE MENU
+        	//			GESTION BDD
+        	//			GESTION USERS
         });
         
         submitCriterion.setOnAction((ActionEvent e) -> {
@@ -137,15 +117,15 @@ public class MainViewController {
 			//            RECUPERATION DES CHOIX DE TYPE AVION
 			//            CREATION OBJETS CLASSES CHOISIES
             //			  A REFAIRE ! ATTENTION !
-
+            
             Plane userPlane = new Plane(
             		new Manufacturer(mfrInput.getText()),
             		new Model(modelInput.getText()),
-        			new Engine(4),
-        			new Engine_nb(Integer.parseInt(engine_nbInput.getSelectionModel().getSelectedItem().toString())),
+        			new Engine(engineInput.getValue()),
+        			new Engine_nb(engine_nbInput.getValue()==null?0:engine_nbInput.getValue()),
         			new Capacity(500, 1000),
-        			new Weight((String) weightInput.getValue()),
-        			new Speed(Integer.parseInt(speedInput.getText())),
+        			new Weight(weightInput.getValue()),
+        			new Speed(speedInput.getText().equals("")?0:Integer.parseInt(speedInput.getText())),
         			new Price(123456)
         		);
 
@@ -177,7 +157,6 @@ public class MainViewController {
                     System.out.println("Requ�te �chou�e !");
                 }
             } catch (SQLException ex) {
-                // TODO Auto-generated catch block
                 ex.printStackTrace();
             }
 

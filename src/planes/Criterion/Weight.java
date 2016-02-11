@@ -8,9 +8,12 @@ public class Weight extends Criteria {
 	private int cat;
 	
 	public Weight(String weight){
-		this.weight = weight;
-		for(int i=1; i<5; i++)
-			if(this.weight.indexOf(i)>0) cat = i;
+		if(weight!=null && weight.startsWith("CLASS ")){
+			this.weight = weight;
+			for(int i=1; i<5; i++)
+				if(this.weight.indexOf(i)>0) cat = i;
+		}else
+			this.weight = "-";		
 	}
 	
 	public Weight(int cat){
@@ -20,7 +23,7 @@ public class Weight extends Criteria {
 
 	@Override
 	public int evaluate(Plane userPlane) {
-		if(weight.equals("") || userPlane.getWeight().toString().equals(""))
+		if(weight.equals("-") || userPlane.getWeight().toString().equals("-"))
 			return -1;
 		else {
 			if(weight.equals(userPlane.getWeight().toString()))
