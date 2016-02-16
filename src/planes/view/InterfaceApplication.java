@@ -25,8 +25,8 @@ public class InterfaceApplication extends Application {
         loginManager.showLoginScreen();
 
         stage.setScene(scene);
-        stage.setMinHeight(500);
-        stage.setMinWidth(800);
+        stage.setMinHeight(600);
+        stage.setMinWidth(1000);
         stage.show();
     }
 }

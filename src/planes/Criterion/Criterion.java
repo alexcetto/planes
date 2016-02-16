@@ -10,11 +10,12 @@ public class Criterion extends Criteria implements Evaluable {
 
 	protected HashMap<String, Criteria> criterion;
 	
-	public Criterion(Manufacturer manufacturer, Model model, Engine engine, Engine_nb nb,
+	public Criterion(Manufacturer manufacturer, Model model, AircraftType aircraftType, Engine engine, Engine_nb nb,
 												Capacity capacity, Weight weight, Speed speed, Price price){
 		criterion = new HashMap<String, Criteria>();
 		criterion.put("manufacturer", manufacturer);
 		criterion.put("model", model);
+		criterion.put("aircraftType", aircraftType);
 		criterion.put("engine", engine);
 		criterion.put("engine_nb", nb);
 		criterion.put("capacity", capacity);
@@ -25,11 +26,11 @@ public class Criterion extends Criteria implements Evaluable {
 
 	
 	/* 
-	 * @param userPlane		Modèle de comparaison créé par l'user
-	 * @return				Pourcentage d'écart moyen à userPlane
+	 * @param userPlane		Modï¿½le de comparaison crï¿½ï¿½ par l'user
+	 * @return				Pourcentage d'ï¿½cart moyen ï¿½ userPlane
 	 * 
-	 * Appelle evaluate() pour chaque critère dans criterion
-	 * Si le critère renvoie -1, il est ignoré (manque d'information)
+	 * Appelle evaluate() pour chaque critï¿½re dans criterion
+	 * Si le critï¿½re renvoie -1, il est ignorï¿½ (manque d'information)
 	 */
 	@Override
 	public int evaluate(Plane userPlane) {
@@ -52,6 +53,8 @@ public class Criterion extends Criteria implements Evaluable {
 	public Criteria getManufacturer(){
 		return criterion.get("manufacturer");
 	}
+
+	public Criteria getAicraftType(){ return criterion.get("aircraftType"); }
 	
 	public Criteria getEngine(){
 		return criterion.get("engine");

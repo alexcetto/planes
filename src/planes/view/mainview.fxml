@@ -58,6 +58,23 @@
                 <Label text="Model" GridPane.columnIndex="2" />
                 <TextField fx:id="modelInput" GridPane.columnIndex="3" />
 
+                <Label text="Type of Aircraft" GridPane.columnIndex="4" />
+                <ChoiceBox fx:id="aircraftTypeInput" prefHeight="25.0" prefWidth="90.0" GridPane.columnIndex="5">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="1 - Glider"/>
+                            <String fx:value="2 - Balloon"/>
+                            <String fx:value="3 - Blimp/Dirigible"/>
+                            <String fx:value="4 - Fixed wing single engine"/>
+                            <String fx:value="5 - Fixed wing multi engine"/>
+                            <String fx:value="6 - Rotorcraft"/>
+                            <String fx:value="7 - Weight-shift-control"/>
+                            <String fx:value="8 - Powered Parachute"/>
+                            <String fx:value="9 - Gyroplane"/>
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+
                 <Label text="Engine number" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                 <ChoiceBox fx:id="engine_nbInput" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <items>
@@ -94,7 +111,7 @@
                     </items>
                 </ChoiceBox>
 
-                <Button fx:id="submitCriterion" defaultButton="true" mnemonicParsing="false" text="Submit" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                <Button fx:id="submitCriterion" defaultButton="true" mnemonicParsing="false" text="Submit" GridPane.columnIndex="5" GridPane.rowIndex="4" />
             <Label text="Manufacturer" />
             <Label text="Min Price" GridPane.rowIndex="1" />
             <Slider GridPane.columnIndex="1" GridPane.rowIndex="1" />

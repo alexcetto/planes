@@ -37,6 +37,7 @@ public class MainViewController {
     @FXML private TextField speedInput;
     @FXML private ChoiceBox<String> weightInput;
     @FXML private ChoiceBox<String> engineInput;
+    @FXML private ChoiceBox<String> aircraftTypeInput;
 
     
     private ObservableList<Plane> data = FXCollections.observableArrayList();
@@ -70,7 +71,13 @@ public class MainViewController {
         engine.setMaxWidth(100);
         engine.setCellValueFactory(
                 new PropertyValueFactory<>("engine"));
-        
+
+        TableColumn <Plane,Criteria> type_aircraft = new TableColumn<>("Type Aircraft");
+                engine.setMinWidth(100);
+                engine.setMaxWidth(100);
+                engine.setCellValueFactory(
+                        new PropertyValueFactory<>("type_aircraft"));
+
         TableColumn <Plane,Criteria> engine_nb = new TableColumn<>("Number");
         engine_nb.setMinWidth(100);
         engine_nb.setMaxWidth(100);
@@ -121,12 +128,13 @@ public class MainViewController {
             Plane userPlane = new Plane(
             		new Manufacturer(mfrInput.getText()),
             		new Model(modelInput.getText()),
+                    new AircraftType(aircraftTypeInput.getValue()),
         			new Engine(engineInput.getValue()),
         			new Engine_nb(engine_nbInput.getValue()==null?0:engine_nbInput.getValue()),
         			new Capacity(500, 1000),
         			new Weight(weightInput.getValue()),
         			new Speed(speedInput.getText().equals("")?0:Integer.parseInt(speedInput.getText())),
-        			new Price(123456)
+        			new Price(0, 1000000)
         		);
 
             try {
@@ -136,14 +144,15 @@ public class MainViewController {
                 	int i=0;
                     while (rs.next()){
                         Plane compared = new Plane(
-                        		new Manufacturer(rs.getString("mfr")),
+                        		new Manufacturer(rs.getString("manufacturer")),
                         		new Model(rs.getString("model")),
-                    			new Engine(rs.getInt("type-eng")),
-                    			new Engine_nb(rs.getInt("no-eng")),
-                    			new Capacity(rs.getInt("no-seats")),
-                    			new Weight(rs.getString("ac-weight")),
+                                new AircraftType(rs.getInt("type_aircraft")),
+                    			new Engine(rs.getInt("type_engine")),
+                    			new Engine_nb(rs.getInt("number_engine")),
+                    			new Capacity(rs.getInt("number_seats")),
+                    			new Weight(rs.getString("aircraft_weight")),
                     			new Speed(rs.getInt("speed")),
-                    			new Price(100000)
+                    			new Price(rs.getInt("price"))
                     		);
                         int score = compared.evaluate(userPlane);
                         //		TRAITEMENT EN FONCTION DU RETURN
@@ -163,7 +172,7 @@ public class MainViewController {
         });
 
         tableProducts.setItems(data);
-        tableProducts.getColumns().addAll(model, mfr, engine, engine_nb, capacity, speed, weight, price);
+        tableProducts.getColumns().addAll(model, mfr, type_aircraft, engine, engine_nb, capacity, speed, weight, price);
         
     }
 }

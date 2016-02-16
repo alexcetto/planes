@@ -6,9 +6,9 @@ public class Plane implements Evaluable{
 	
 	protected Criterion criterion;
 	
-	public Plane(Manufacturer manufacturer, Model model, Engine engine, Engine_nb nb,
+	public Plane(Manufacturer manufacturer, Model model, AircraftType aircraftType, Engine engine, Engine_nb nb,
 			Capacity capacity, Weight weight, Speed speed, Price price){
-		this.criterion = new Criterion(manufacturer, model, engine, nb, capacity, weight, speed, price);
+		this.criterion = new Criterion(manufacturer, model, aircraftType, engine, nb, capacity, weight, speed, price);
 	}
 	
 	public String getStatement(){
@@ -26,6 +26,8 @@ public class Plane implements Evaluable{
 	public Criteria getManufacturer(){
 		return criterion.getManufacturer();
 	}
+
+	public Criteria getAicraftType() { return criterion.getAicraftType(); }
 	
 	public Criteria getEngine(){
 		return criterion.getEngine();
