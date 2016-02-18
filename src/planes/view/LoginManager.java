@@ -63,4 +63,32 @@ public class LoginManager {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void showUserManageView(){
+    	try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("usermanageview.fxml")
+            );
+            scene.setRoot((Parent) loader.load());
+            UserManageViewController controller =
+                    loader.<UserManageViewController>getController();
+            controller.initSessionID();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showDataManageView(){
+    	try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("datamanageview.fxml")
+            );
+            scene.setRoot((Parent) loader.load());
+            DataManageViewController controller =
+                    loader.<DataManageViewController>getController();
+            controller.initSessionID();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

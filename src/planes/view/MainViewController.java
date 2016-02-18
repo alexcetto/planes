@@ -29,7 +29,10 @@ public class MainViewController {
     @FXML private Button logoutButton;
     @FXML private Label sessionLabel;
     @FXML private TableView<Plane> tableProducts;
-    @FXML private Button adminButton;
+    @FXML private Button adminButtonUser;
+    @FXML private Button adminButtonData;
+    @FXML private Button reserveButton;
+    @FXML private Button purchasesButton;
     @FXML private Button submitCriterion;
     @FXML private TextField modelInput;
     @FXML private TextField mfrInput;
@@ -43,8 +46,13 @@ public class MainViewController {
 
 	@SuppressWarnings("unchecked")
 	public void initSessionID(final LoginManager loginManager, User user) {
-		if(user.isAdmin())
-			adminButton.setVisible(true);
+		if(user.isAdmin()){
+			adminButtonUser.setVisible(true);
+			adminButtonData.setVisible(true);
+		}else{
+			reserveButton.setVisible(true);
+			purchasesButton.setVisible(true);
+		}
         sessionLabel.setText(user.getName());
         logoutButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -54,6 +62,12 @@ public class MainViewController {
         });
 
         tableProducts.setEditable(true);
+
+        TableColumn <Plane,Criteria> match = new TableColumn<>("%Match");
+        match.setMinWidth(60);
+        match.setMaxWidth(60);
+        match.setCellValueFactory(
+                new PropertyValueFactory<>("match"));
 
         TableColumn <Plane,Criteria> mfr = new TableColumn<>("Manufacturer");
         mfr.setMinWidth(150);
@@ -102,52 +116,68 @@ public class MainViewController {
                 new PropertyValueFactory<>("price"));
 
 
-        adminButton.setOnAction((ActionEvent e) -> {
-            //			OUVERTURE D'UNE FENETRE DE MENU
-        	//			GESTION BDD
-        	//			GESTION USERS
+        adminButtonUser.setOnAction((ActionEvent e) -> {
+        	loginManager.showUserManageView();
+        });
+        
+        adminButtonData.setOnAction((ActionEvent e) -> {
+        	loginManager.showDataManageView();
+        });
+        
+        reserveButton.setOnAction((ActionEvent e) -> {
+//        	FOREACH SELECTED PLANE -> GOTO USER PANIER
+//        	user.add(selectedPlanes)
+        });
+        
+        purchasesButton.setOnAction((ActionEvent e) -> {
+//        	NEW WINDOW --> DISPLAY USER PANIER
+//        	DISPLAY(user.getPanier())
         });
         
         submitCriterion.setOnAction((ActionEvent e) -> {
+        	data.clear();
             GlobalConnector gc = new GlobalConnector();
             Connection co = gc.getCo();
             PreparedStatement pstt;
             ResultSet rs;
             
-			//            RECUPERATION DES CHOIX DE TYPE AVION
-			//            CREATION OBJETS CLASSES CHOISIES
-            //			  A REFAIRE ! ATTENTION !
+//            		RECUP IHM
+//          String statement = typeAircraft
+//          RELATION BDD ---> NOS CLASSES?
+            String statement = "";
             
             Plane userPlane = new Plane(
-            		new Manufacturer(mfrInput.getText()),
-            		new Model(modelInput.getText()),
+            		new Manufacturer(mfrInput.getText().toUpperCase()),
+            		new Model(modelInput.getText().toUpperCase()),
         			new Engine(engineInput.getValue()),
         			new Engine_nb(engine_nbInput.getValue()==null?0:engine_nbInput.getValue()),
-        			new Capacity(500, 1000),
+        			//		RECUP IHM
+        			new Capacity(0),
         			new Weight(weightInput.getValue()),
         			new Speed(speedInput.getText().equals("")?0:Integer.parseInt(speedInput.getText())),
-        			new Price(123456)
+        			//		RECUP IHM
+        			new Price(0)
         		);
 
             try {
-                pstt = co.prepareStatement( "SELECT * FROM plane " + userPlane.getStatement() + ";" );
+                pstt = co.prepareStatement( "SELECT * FROM plane " + statement + ";" );
                 rs = pstt.executeQuery();
                 if(rs.next()){
                 	int i=0;
                     while (rs.next()){
                         Plane compared = new Plane(
-                        		new Manufacturer(rs.getString("mfr")),
+                        		new Manufacturer(rs.getString("manufacturer")),
                         		new Model(rs.getString("model")),
-                    			new Engine(rs.getInt("type-eng")),
-                    			new Engine_nb(rs.getInt("no-eng")),
-                    			new Capacity(rs.getInt("no-seats")),
-                    			new Weight(rs.getString("ac-weight")),
+                    			new Engine(rs.getInt("type_engine")),
+                    			new Engine_nb(rs.getInt("number_engine")),
+                    			new Capacity(rs.getInt("number_seats")),
+                    			new Weight(rs.getString("aircraft_weight")),
                     			new Speed(rs.getInt("speed")),
-                    			new Price(100000)
+                    			new Price(rs.getInt("price"))
                     		);
-                        int score = compared.evaluate(userPlane);
+                        compared.evaluate(userPlane);
                         //		TRAITEMENT EN FONCTION DU RETURN
-                        if(score > 50){
+                        if(compared.getMatch() > 50){
                         	data.add(compared);
                         	i++;
                         }
@@ -163,7 +193,7 @@ public class MainViewController {
         });
 
         tableProducts.setItems(data);
-        tableProducts.getColumns().addAll(model, mfr, engine, engine_nb, capacity, speed, weight, price);
+        tableProducts.getColumns().addAll(match, model, mfr, engine, engine_nb, capacity, speed, weight, price);
         
     }
 }

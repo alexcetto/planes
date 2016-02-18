@@ -4,11 +4,13 @@ import planes.Criterion.*;
 
 public class Plane implements Evaluable{	
 	
+	protected int match;
 	protected Criterion criterion;
 	
 	public Plane(Manufacturer manufacturer, Model model, Engine engine, Engine_nb nb,
 			Capacity capacity, Weight weight, Speed speed, Price price){
 		this.criterion = new Criterion(manufacturer, model, engine, nb, capacity, weight, speed, price);
+		match = 0;
 	}
 	
 	public String getStatement(){
@@ -16,7 +18,8 @@ public class Plane implements Evaluable{
 	}
 	
 	public int evaluate(Plane userPlane){
-		return 100 - criterion.evaluate(userPlane);
+		match = 100 - criterion.evaluate(userPlane);
+		return match;
 	}
 	
 	public Criteria getModel(){
@@ -49,5 +52,9 @@ public class Plane implements Evaluable{
 	
 	public Criteria getWeight(){
 		return criterion.getWeight();
+	}
+	
+	public int getMatch(){
+		return match;
 	}
 }

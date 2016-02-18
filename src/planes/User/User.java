@@ -4,19 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import planes.Plane;
 
 /**
  * Created by alexandrecetto on 12/12/2015.
  */
 public class User {
-    String name;
-    String mdp;
-    boolean admin;
+    private String name;
+    private String mdp;
+    private boolean admin;
+    private ArrayList<Plane> panier;
 
     public User(String login, String password, boolean isAdmin){
     	name = login;
     	mdp = password;
     	admin = isAdmin;
+    	panier = new ArrayList<>();
     }
     
     public User(GlobalConnector gc, String usrName, String usrPass){
@@ -53,5 +58,13 @@ public class User {
     
     public String getName(){
     	return name;
+    }
+    
+    public void add(Plane plane){
+    	panier.add(plane);
+    }
+    
+    public ArrayList<Plane> getPanier(){
+    	return panier;
     }
 }
