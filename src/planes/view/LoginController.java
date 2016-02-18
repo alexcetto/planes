@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import planes.User.GlobalConnector;
 import planes.User.User;
@@ -15,7 +16,7 @@ public class LoginController {
     @FXML
     private TextField user;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private Button loginButton;
 
