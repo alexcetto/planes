@@ -9,12 +9,7 @@ public class Plane implements Evaluable{
 	
 	public Plane(Manufacturer manufacturer, Model model, AircraftType aircraftType, Engine engine, Engine_nb nb,
 			Capacity capacity, Weight weight, Speed speed, Price price){
-<<<<<<< HEAD
-		this.criterion = new Criterion(manufacturer, model, engine, nb, capacity, weight, speed, price);
-		match = 0;
-=======
 		this.criterion = new Criterion(manufacturer, model, aircraftType, engine, nb, capacity, weight, speed, price);
->>>>>>> 58ca43b96bec56222962fd39f69a598ea7b94bac
 	}
 	
 	public String getStatement(){

@@ -29,7 +29,6 @@ public class AircraftType extends Criteria {
             this.aircraftType = types.get(0);
     }
 
-
     @Override
     public int evaluate(Plane userPlane) {
         if(aircraftType.equals(userPlane.getAicraftType().toString()))

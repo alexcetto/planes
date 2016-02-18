@@ -154,26 +154,16 @@ public class MainViewController {
             String statement = "";
             
             Plane userPlane = new Plane(
-<<<<<<< HEAD
-            		new Manufacturer(mfrInput.getText().toUpperCase()),
-            		new Model(modelInput.getText().toUpperCase()),
-=======
             		new Manufacturer(mfrInput.getText()),
             		new Model(modelInput.getText()),
                     new AircraftType(aircraftTypeInput.getValue()),
->>>>>>> 58ca43b96bec56222962fd39f69a598ea7b94bac
         			new Engine(engineInput.getValue()),
         			new Engine_nb(engine_nbInput.getValue()==null?0:engine_nbInput.getValue()),
         			//		RECUP IHM
         			new Capacity(0),
         			new Weight(weightInput.getValue()),
         			new Speed(speedInput.getText().equals("")?0:Integer.parseInt(speedInput.getText())),
-<<<<<<< HEAD
-        			//		RECUP IHM
-        			new Price(0)
-=======
         			new Price(0, 1000000)
->>>>>>> 58ca43b96bec56222962fd39f69a598ea7b94bac
         		);
 
             try {
@@ -185,10 +175,7 @@ public class MainViewController {
                         Plane compared = new Plane(
                         		new Manufacturer(rs.getString("manufacturer")),
                         		new Model(rs.getString("model")),
-<<<<<<< HEAD
-=======
                                 new AircraftType(rs.getInt("type_aircraft")),
->>>>>>> 58ca43b96bec56222962fd39f69a598ea7b94bac
                     			new Engine(rs.getInt("type_engine")),
                     			new Engine_nb(rs.getInt("number_engine")),
                     			new Capacity(rs.getInt("number_seats")),
@@ -214,11 +201,7 @@ public class MainViewController {
         });
 
         tableProducts.setItems(data);
-<<<<<<< HEAD
-        tableProducts.getColumns().addAll(match, model, mfr, engine, engine_nb, capacity, speed, weight, price);
-=======
-        tableProducts.getColumns().addAll(model, mfr, type_aircraft, engine, engine_nb, capacity, speed, weight, price);
->>>>>>> 58ca43b96bec56222962fd39f69a598ea7b94bac
+        tableProducts.getColumns().addAll(match, model, mfr, type_aircraft, engine, engine_nb, capacity, speed, weight, price);
         
     }
 }
