@@ -5,9 +5,6 @@ import planes.Plane;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by alexandrecetto on 16/02/2016.
- */
 public class AircraftType extends Criteria {
 
     private static List<String> types = Arrays.asList("Glider", "Balloon", "Blimp/Dirigible", "Fixed Wing single engine", "Fixed wing multi engine", "Rotorcraft",
@@ -16,8 +13,8 @@ public class AircraftType extends Criteria {
     String aircraftType;
 
     public AircraftType(int type){
-        if(type<0 || type>=types.size() || type==9)
-            this.aircraftType = types.get(0);
+        if(type<0 || type>=types.size())
+            this.aircraftType = types.get(3);
         else
             this.aircraftType = types.get(type);
     }
@@ -26,7 +23,7 @@ public class AircraftType extends Criteria {
         if(type!=null && types.contains(type))
             this.aircraftType = type;
         else
-            this.aircraftType = types.get(0);
+            this.aircraftType = types.get(3);
     }
 
     @Override
@@ -35,5 +32,10 @@ public class AircraftType extends Criteria {
             return 0;
         else
             return Ponderation.ENGINE * 100;
+    }
+
+    @Override
+    public String toString() {
+        return aircraftType;
     }
 }

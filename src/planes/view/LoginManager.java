@@ -38,7 +38,7 @@ public class LoginManager {
     public void showLoginScreen() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("login.fxml")
+                    getClass().getResource("xml/login.fxml")
             );
             scene.setRoot((Parent) loader.load());
 
@@ -53,7 +53,7 @@ public class LoginManager {
     private void showMainView(User user) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("mainview.fxml")
+                    getClass().getResource("xml/mainview.fxml")
             );
             scene.setRoot((Parent) loader.load());
             MainViewController controller =
@@ -67,7 +67,7 @@ public class LoginManager {
     public void showUserManageView(){
     	try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("usermanageview.fxml")
+                    getClass().getResource("xml/usermanageview.fxml")
             );
             scene.setRoot((Parent) loader.load());
             UserManageViewController controller =
@@ -81,7 +81,7 @@ public class LoginManager {
     public void showDataManageView(){
     	try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("datamanageview.fxml")
+                    getClass().getResource("xml/datamanageview.fxml")
             );
             scene.setRoot((Parent) loader.load());
             DataManageViewController controller =
