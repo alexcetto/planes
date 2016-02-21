@@ -7,7 +7,8 @@ import java.util.List;
 
 public class AircraftType extends Criteria {
 
-    private static List<String> types = Arrays.asList("Glider", "Balloon", "Blimp/Dirigible", "Fixed Wing single engine", "Fixed wing multi engine", "Rotorcraft",
+    private static List<String> types = Arrays.asList("Glider", "Balloon", "Blimp/Dirigible",
+            "Fixed Wing single engine", "Fixed wing multi engine", "Rotorcraft",
             "Weight-Shift-Control", "Powered Parachute", "Gyroplane");
 
     String aircraftType;

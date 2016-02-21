@@ -5,12 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import planes.Plane;
 import planes.Criterion.*;
@@ -41,6 +36,8 @@ public class MainViewController {
     @FXML private ChoiceBox<String> weightInput;
     @FXML private ChoiceBox<String> engineInput;
     @FXML private ChoiceBox<String> aircraftTypeInput;
+    @FXML private TextField maxPriceInput;
+    @FXML private TextField minPriceInput;
 
     
     private ObservableList<Plane> data = FXCollections.observableArrayList();
@@ -163,7 +160,7 @@ public class MainViewController {
         			new Capacity(0),
         			new Weight(weightInput.getValue()),
         			new Speed(speedInput.getText().equals("")?0:Integer.parseInt(speedInput.getText())),
-        			new Price(0, 1000000)
+        			new Price(minPriceInput.getText().equals("")?0:Integer.parseInt(minPriceInput.getText()), maxPriceInput.getText().equals("")?0:Integer.parseInt(maxPriceInput.getText()))
         		);
 
             try {
