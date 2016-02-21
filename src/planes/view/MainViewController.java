@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Controls the main application screen
@@ -60,6 +62,7 @@ public class MainViewController {
         });
 
         tableProducts.setEditable(true);
+        tableProducts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         TableColumn <Plane,Criteria> match = new TableColumn<>("%Match");
         match.setMinWidth(60);
@@ -130,13 +133,12 @@ public class MainViewController {
         
         reserveButton.setOnAction((ActionEvent e) -> {
 //        	FOREACH SELECTED PLANE -> GOTO USER PANIER
-//        	user.add(selectedPlanes)
+            //ArrayList<Plane> currentSelection = tableProducts.getSelectionModel().getSelectedItems().stream().collect(Collectors.toCollection(ArrayList::new));
+            user.addPlaneToBasket(tableProducts.getSelectionModel().getSelectedItems());
         });
+
         
-        purchasesButton.setOnAction((ActionEvent e) -> {
-//        	NEW WINDOW --> DISPLAY USER PANIER
-//        	DISPLAY(user.getPanier())
-        });
+        purchasesButton.setOnAction((ActionEvent e) -> loginManager.showBasketView(user));
         
         submitCriterion.setOnAction((ActionEvent e) -> {
         	data.clear();
@@ -144,11 +146,23 @@ public class MainViewController {
             Connection co = gc.getCo();
             PreparedStatement pstt;
             ResultSet rs;
+
+            int minPrice = 0, maxPrice = 100000000;
             
 //            		RECUP IHM
 //          String statement = typeAircraft
 //          RELATION BDD ---> NOS CLASSES?
             String statement = "";
+
+            if (minPriceInput.getText().equals("") || Integer.parseInt(minPriceInput.getText()) < 0)
+                minPrice = 0;
+            else if (Integer.parseInt(maxPriceInput.getText()) <= Integer.parseInt(minPriceInput.getText())
+                    || Integer.parseInt(maxPriceInput.getText()) <= 0 || maxPriceInput.getText().equals(""))
+                maxPrice = 100000000;
+            else {
+                minPrice = Integer.parseInt(minPriceInput.getText());
+                maxPrice = Integer.parseInt(maxPriceInput.getText());
+            }
             
             Plane userPlane = new Plane(
             		new Manufacturer(mfrInput.getText()),
@@ -160,7 +174,7 @@ public class MainViewController {
         			new Capacity(0),
         			new Weight(weightInput.getValue()),
         			new Speed(speedInput.getText().equals("")?0:Integer.parseInt(speedInput.getText())),
-        			new Price(minPriceInput.getText().equals("")?0:Integer.parseInt(minPriceInput.getText()), maxPriceInput.getText().equals("")?0:Integer.parseInt(maxPriceInput.getText()))
+        			new Price(minPrice, maxPrice)
         		);
 
             try {

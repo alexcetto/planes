@@ -3,6 +3,8 @@ package planes.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import planes.User.User;
 
 import java.io.IOException;
@@ -88,6 +90,25 @@ public class LoginManager {
                     loader.<DataManageViewController>getController();
             controller.initSessionID();
         } catch (IOException ex) {
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void showBasketView(User user){
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("xml/basketview.fxml")
+            );
+            Parent root = (Parent) loader.load();
+            UserBasketController controller =
+                    loader.<UserBasketController>getController();
+            controller.initBasket(user);
+
+            Scene sc = new Scene(root);
+            stage.setScene(sc);
+            stage.show();
+        } catch (Exception ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

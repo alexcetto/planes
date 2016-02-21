@@ -58,4 +58,9 @@ public class Plane implements Evaluable{
 	public int getMatch(){
 		return match;
 	}
+
+	@Override
+	public String toString() {
+		return "Plane " + getModel() + " " + getManufacturer();
+	}
 }
