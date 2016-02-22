@@ -123,6 +123,8 @@
             <TextField fx:id="minPriceInput" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label layoutX="20.0" layoutY="62.0" text="Max Price" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="maxPriceInput" layoutX="111.0" layoutY="63.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label layoutX="20.0" layoutY="62.0" text="Capacity" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <TextField fx:id="capInput" layoutX="111.0" layoutY="63.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             
             <Label text="Engine" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="engineInput" GridPane.columnIndex="1" GridPane.rowIndex="2">

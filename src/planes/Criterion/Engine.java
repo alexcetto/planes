@@ -1,9 +1,9 @@
 package planes.Criterion;
 
+import planes.Plane;
+
 import java.util.Arrays;
 import java.util.List;
-
-import planes.Plane;
 
 public class Engine extends Criteria {
 	
@@ -34,13 +34,13 @@ public class Engine extends Criteria {
 
 	@Override
 	public int evaluate(Plane userPlane) {
-		if(type.equals("-") || userPlane.getEngine().toString().equals("-"))
+		if(type.equals("-") || userPlane.getEngine().equals("-"))
 			return -1;
 		else {
-			if(type.equals(userPlane.getEngine().toString()))
+			if(type.equals(userPlane.getEngine()))
 				return 0;
 			else
-				return Ponderation.ENGINE * 100;
+				return 100;
 		}
 	}
 

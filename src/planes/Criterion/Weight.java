@@ -29,7 +29,7 @@ public class Weight extends Criteria {
 			if(weight.equals(userPlane.getWeight().toString()))
 				return 0;
 			else
-				return Ponderation.WEIGHT * 100;
+				return 100;
 		}
 	}
 

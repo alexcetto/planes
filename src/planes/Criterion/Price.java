@@ -20,10 +20,17 @@ public class Price extends Criteria {
 	@Override
 	public int evaluate(Plane userPlane) {
 		Price userPrice = (Price) userPlane.getPriceCrit();
-		if(price_min==0 || userPrice.getMin()==0)
+		if(price_min==0 || userPrice.getMin()==-1)
 			return -1;
-		else
-			return Ponderation.PRICE * (Math.abs(userPrice.getMin()-price_min)*100)/userPrice.getMin();
+		else{
+			if(price_min >= userPrice.getMin() && price_min <= userPrice.getMax() || userPrice.getMin() == 0 && userPrice.getMax() == 0)
+				return 0;
+			else if(price_min < userPrice.getMin()){
+				return (Math.abs(userPrice.getMin()-price_min)*100)/userPrice.getMin();
+			} else {
+				return (Math.abs(userPrice.getMax()-price_min)*100)/userPrice.getMax();
+			}
+		}
 	}
 	
 	public int getMin(){

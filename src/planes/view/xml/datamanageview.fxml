@@ -15,6 +15,7 @@
     </padding>
     <bottom>
         <FlowPane>
+        	<Button fx:id="addNewButton" text="Add new"/>
             <Button fx:id="removeSelectedButton" text="Remove Selected"/>
             <Button fx:id="backToMain" text="Back To Main"/>
         </FlowPane>

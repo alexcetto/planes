@@ -24,6 +24,7 @@ public class DataManageViewController {
 	@FXML BorderPane basePane;
 	@FXML Button backToMain;
 	@FXML Button removeSelectedButton;
+	@FXML Button addNewButton;
 
 
 
@@ -40,6 +41,10 @@ public class DataManageViewController {
 			//ArrayList<Plane> currentSelection = tableProductsBasket.getSelectionModel().getSelectedItems().stream().collect(Collectors.toCollection(ArrayList::new));
 			user.removeUser(usersTable.getSelectionModel().getSelectedItem());
 			data.remove(usersTable.getSelectionModel().getSelectedItem());
+		});
+		
+		addNewButton.setOnAction((ActionEvent e) -> {
+			
 		});
 
 		TableColumn<User, String> login = new TableColumn<>("Login");

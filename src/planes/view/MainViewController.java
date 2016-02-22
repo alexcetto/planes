@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -38,16 +40,21 @@ public class MainViewController {
     @FXML private ChoiceBox<Integer> engine_nbInput;
     @FXML private TextField speedInput;
     @FXML private ChoiceBox<String> weightInput;
+    @FXML private TextField capInput;
     @FXML private ChoiceBox<String> engineInput;
     @FXML private ChoiceBox<String> aircraftTypeInput;
     @FXML private TextField maxPriceInput;
     @FXML private TextField minPriceInput;
+    
+	public static final int MIN_MATCH = 50;
+	public static final int MIN_PRICE = 0;
+	public static final int MAX_PRICE = 100000000;
 
     
     private ObservableList<Plane> data = FXCollections.observableArrayList();
 
 	@SuppressWarnings("unchecked")
-	public void initSessionID(final LoginManager loginManager, User user) {
+	public void initSessionID(final LoginManager loginManager, User user) {		
 		if(user.isAdmin()){
 			adminButtonUser.setVisible(true);
 			adminButtonData.setVisible(true);
@@ -82,11 +89,11 @@ public class MainViewController {
 	        model.setCellValueFactory(
 	                new PropertyValueFactory<>("model"));
 	        
-        TableColumn <Plane,String> type_aircraft = new TableColumn<>("Type Aircraft");
-	        type_aircraft.setMinWidth(100);
-	        type_aircraft.setMaxWidth(100);
-	        type_aircraft.setCellValueFactory(
-                        new PropertyValueFactory<>("type_aircraft"));
+        TableColumn <Plane,String> type = new TableColumn<>("Aircraft Type");
+	        type.setMinWidth(100);
+	        type.setMaxWidth(100);
+	        type.setCellValueFactory(
+	        		new PropertyValueFactory<>("type"));
 
         TableColumn <Plane,String> engine = new TableColumn<>("Engine");
 	        engine.setMinWidth(100);
@@ -144,12 +151,12 @@ public class MainViewController {
             }
 
             mfr.setCellFactory(TextFieldTableCell.forTableColumn());
-            mfr.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            mfr.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
             model.setCellFactory(TextFieldTableCell.forTableColumn());
-            model.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            model.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
-            type_aircraft.setCellFactory(ChoiceBoxTableCell.forTableColumn(
+            type.setCellFactory(ChoiceBoxTableCell.forTableColumn(
             		"Glider",
                     "Balloon",
                     "Blimp/Dirigible",
@@ -160,7 +167,7 @@ public class MainViewController {
                     "Powered Parachute",
                     "Gyroplane"
             		));
-            type_aircraft.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            type.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
             engine.setCellFactory(ChoiceBoxTableCell.forTableColumn(
             		"Reciprocating",
@@ -174,22 +181,30 @@ public class MainViewController {
                     "Electric",
                     "Rotary"
             		));
-            engine.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            engine.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
             engine_nb.setCellFactory(ChoiceBoxTableCell.forTableColumn("1", "2","3","4","5","6","8","10","12"));
-            engine_nb.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            engine_nb.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
             capacity.setCellFactory(TextFieldTableCell.forTableColumn());
-            capacity.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            capacity.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
             speed.setCellFactory(TextFieldTableCell.forTableColumn());
-            speed.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            speed.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
             weight.setCellFactory(ChoiceBoxTableCell.forTableColumn("CLASS 1","CLASS 2","CLASS 3","CLASS 4"));
-            weight.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            weight.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
 
             price.setCellFactory(TextFieldTableCell.forTableColumn());
-            price.setOnEditCommit(event -> edit(event.getTableColumn().getText(), model.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
+            price.setOnEditCommit(event -> edit(event, model.getCellData(event.getRowValue())));
+        });
+        
+        adminAddButton.setOnAction((ActionEvent e) -> {
+        	
+        });
+        
+        adminDeleteButton.setOnAction((ActionEvent e) -> {
+        	data.remove(tableProducts.getSelectionModel().getSelectedItem());
         });
         
         reserveButton.setOnAction((ActionEvent e) -> {
@@ -210,36 +225,54 @@ public class MainViewController {
             Connection co = gc.getCo();
             PreparedStatement pstt;
             ResultSet rs;
-
-            int minPrice = 0, maxPrice = 100000000;
             
-//            		RECUP IHM
-//          String statement = typeAircraft
-//          RELATION BDD ---> NOS CLASSES?
-
-            if (minPriceInput.getText().equals("") || Integer.parseInt(minPriceInput.getText()) < 0)
-                minPrice = 0;
-            else if (Integer.parseInt(maxPriceInput.getText()) <= Integer.parseInt(minPriceInput.getText())
-                    || Integer.parseInt(maxPriceInput.getText()) <= 0 || maxPriceInput.getText().equals(""))
-                maxPrice = 100000000;
-            else {
-                minPrice = Integer.parseInt(minPriceInput.getText());
-                maxPrice = Integer.parseInt(maxPriceInput.getText());
+            int minPrice, maxPrice, userSpeed, userCap;
+            try{
+            	minPrice = Integer.parseInt(minPriceInput.getText());
+            	if(minPrice<MIN_PRICE)
+            		minPrice = MIN_PRICE;
+                try{
+                	maxPrice = Integer.parseInt(maxPriceInput.getText());
+                	if(maxPrice>MAX_PRICE)
+                		maxPrice = MAX_PRICE;
+                	else if(maxPrice < minPrice)
+                		maxPrice = minPrice;
+                }catch(NumberFormatException error){
+                	maxPrice = MAX_PRICE;
+                }
+            }catch(NumberFormatException error){
+            	minPrice = -1;
+            	maxPrice = -1;
+            }
+            
+            try{
+            	userSpeed = Integer.parseInt(speedInput.getText());
+            	if(userSpeed<0)
+            		userSpeed = 0;
+            }catch(NumberFormatException error){
+            	userSpeed = 0;
+            }
+            
+            try{
+            	userCap = Integer.parseInt(capInput.getText());
+            	if(userCap<0)
+            		userCap = 0;
+            }catch(NumberFormatException error){
+            	userCap = 0;
             }
             
             Plane userPlane = new Plane(
             		new Manufacturer(mfrInput.getText()),
             		new Model(modelInput.getText()),
-                    new AircraftType(aircraftTypeInput.getValue()),
+                    new Type(aircraftTypeInput.getValue()),
         			new Engine(engineInput.getValue()),
         			new Engine_nb(engine_nbInput.getValue()==null?0:engine_nbInput.getValue()),
-        			//		RECUP IHM
-        			new Capacity(0),
+        			new Capacity(userCap),
         			new Weight(weightInput.getValue()),
-        			new Speed(speedInput.getText().equals("")?0:Integer.parseInt(speedInput.getText())),
+        			new Speed(userSpeed),
         			new Price(minPrice, maxPrice)
         		);
-
+            
             try {
                 pstt = co.prepareStatement( "SELECT * FROM plane;" );
                 rs = pstt.executeQuery();
@@ -248,7 +281,7 @@ public class MainViewController {
                     Plane compared = new Plane(
                     		new Manufacturer(rs.getString("manufacturer")),
                     		new Model(rs.getString("model")),
-                            new AircraftType(rs.getInt("type_aircraft")),
+                            new Type(rs.getInt("type_aircraft")),
                 			new Engine(rs.getInt("type_engine")),
                 			new Engine_nb(rs.getInt("number_engine")),
                 			new Capacity(rs.getInt("number_seats")),
@@ -257,8 +290,7 @@ public class MainViewController {
                 			new Price(rs.getInt("price"))
                 		);
                     compared.evaluate(userPlane);
-                    //		TRAITEMENT EN FONCTION DU RETURN
-                    if(compared.getMatch() > 50){
+                    if(compared.getMatch() > MIN_MATCH){
                     	data.add(compared);
                     	i++;
                     }
@@ -271,14 +303,45 @@ public class MainViewController {
         });
 
         tableProducts.setItems(data);
-        tableProducts.getColumns().addAll(match, mfr, model, type_aircraft, engine, engine_nb, capacity, speed, weight, price);
+        tableProducts.getColumns().addAll(match, mfr, model, type, engine, engine_nb, capacity, speed, weight, price);
         
     }
 
-    private void edit(String row, String model, String oldValue, String newValue) {
-		System.out.println(row+"\n"+model+"\n"+oldValue+"\n"+newValue);
-    	
-	}
+    private void edit(CellEditEvent<Plane,String> event, String model) {
+		String row = event.getTableColumn().getText();
+    	String value = event.getNewValue();
+    	if(row.equals("Price") || row.equals("Capacity") || row.equals("Speed")){
+			try{
+				Integer.parseInt(value);				
+			}catch(NumberFormatException e){
+				
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Number required");
+				alert.setHeaderText(null);
+				alert.setContentText("Please enter a number or your changes will not be saved");
+				alert.showAndWait();
+				return;
+			}
+		}
+    	System.out.println("Pour le modèle "+model+", on change la valeur de "+row+" en "+value);
+//		//				UPDATE BDD
+//		//				COORDONNER COLUMN NAMES AND BDD NAMES !!!!
+//		GlobalConnector gc = new GlobalConnector();
+//		Connection co = gc.getCo();
+//		PreparedStatement pstt;
+//		ResultSet rs;
+//
+//		try {
+//			pstt = co.prepareStatement("UPDATE plane SET `"+row+"`='"+ value + "' WHERE `model`='"+ model + "';");
+//			rs = pstt.executeQuery();
+//		}catch(SQLException e){
+//			e.printStackTrace();
+//		}
+//		rs = null;
+//		pstt = null;
+//		gc = null;
+//		//				FIN UPDATE BDD
+    }
 
 	public void resetButton(){
         purchasesButton.setDisable(false);

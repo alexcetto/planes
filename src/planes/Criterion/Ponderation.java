@@ -12,5 +12,6 @@ public class Ponderation {
 	public static final int MODEL = 3;
 	public static final int PRICE = 2;
 	public static final int SPEED = 2;
+	public static final int TYPE = 4;
 	public static final int WEIGHT = 3;
 }

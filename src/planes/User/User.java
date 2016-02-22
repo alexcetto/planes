@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import planes.Plane;
 
 /**
@@ -87,20 +89,22 @@ public class User {
 	}
 
 	public void removeUser(User user){
-		GlobalConnector gc = new GlobalConnector();
-		Connection co = gc.getCo();
-		PreparedStatement pstt;
-		ResultSet rs;
-
-		try {
-			pstt = co.prepareStatement("DELETE FROM users WHERE `login`='"+ user.getName() + "';");
-			rs = pstt.executeQuery();
-		}catch(SQLException e){
-			e.printStackTrace();
+		if(user!=null){
+			GlobalConnector gc = new GlobalConnector();
+			Connection co = gc.getCo();
+			PreparedStatement pstt;
+			ResultSet rs;
+	
+			try {
+				pstt = co.prepareStatement("DELETE FROM users WHERE `login`='"+ user.getName() + "';");
+				rs = pstt.executeQuery();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			rs = null;
+			pstt = null;
+			gc = null;
 		}
-		rs = null;
-		pstt = null;
-		gc = null;
 	}
 
 	public void modifyUserName(String oldName, String newName){
@@ -142,6 +146,12 @@ public class User {
 			rs = null;
 			pstt = null;
 			gc = null;
+		}else{
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Can not change your status");
+			alert.setHeaderText(null);
+			alert.setContentText("You can not change your status");
+			alert.showAndWait();
 		}
 	}
 }

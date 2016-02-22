@@ -10,12 +10,12 @@ public class Criterion extends Criteria implements Evaluable {
 
 	protected HashMap<String, Criteria> criterion;
 	
-	public Criterion(Manufacturer manufacturer, Model model, AircraftType aircraftType, Engine engine, Engine_nb nb,
+	public Criterion(Manufacturer manufacturer, Model model, Type type, Engine engine, Engine_nb nb,
 												Capacity capacity, Weight weight, Speed speed, Price price){
 		criterion = new HashMap<String, Criteria>();
 		criterion.put("manufacturer", manufacturer);
 		criterion.put("model", model);
-		criterion.put("aircraftType", aircraftType);
+		criterion.put("type", type);
 		criterion.put("engine", engine);
 		criterion.put("engine_nb", nb);
 		criterion.put("capacity", capacity);
@@ -53,8 +53,8 @@ public class Criterion extends Criteria implements Evaluable {
 		return ""+criterion.get("manufacturer");
 	}
 
-	public String getAicraftType(){ 
-		return ""+criterion.get("aircraftType"); 
+	public String getType(){ 
+		return ""+criterion.get("type"); 
 	}
 	
 	public String getEngine(){
