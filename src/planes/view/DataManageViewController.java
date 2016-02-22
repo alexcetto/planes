@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +27,7 @@ public class DataManageViewController {
 
 
 
+	@SuppressWarnings("unchecked")
 	public void manageUsers(LoginManager lg, User user) {
 		TableView<User> usersTable = new TableView<>();
 		usersTable.setEditable(true);
@@ -56,23 +58,22 @@ public class DataManageViewController {
 		admin.setMinWidth(50);
 		admin.setMaxWidth(200);
 		admin.setCellValueFactory(new PropertyValueFactory<>("admin"));
+		admin.setCellFactory(ChoiceBoxTableCell.forTableColumn("Administrator", "User"));		
+		admin.setOnEditCommit(event -> user.modifyAdmin(login.getCellData(event.getRowValue()), event.getOldValue(), event.getNewValue()));
 
 		GlobalConnector gc = new GlobalConnector();
 		Connection co = gc.getCo();
 		PreparedStatement pstt;
 		ResultSet rs;
-		String statement = "";
 
 		try {
 			pstt = co.prepareStatement("SELECT * FROM users;");
 			rs = pstt.executeQuery();
-			if (rs.next()) {
-				while (rs.next()) {
-					data.add(new User(rs.getString("login"),
-							rs.getString("password"),
-							rs.getBoolean("admin"))
-					);
-				}
+			while (rs.next()) {
+				data.add(new User(rs.getString("login"),
+						rs.getString("password"),
+						rs.getBoolean("admin"))
+				);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

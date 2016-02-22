@@ -12,7 +12,7 @@ public class Engine_nb extends Criteria {
 
 	@Override
 	public int evaluate(Plane userPlane) {
-		Engine_nb userEngine_nb = (Engine_nb) userPlane.getEngine_nb();
+		Engine_nb userEngine_nb = (Engine_nb) userPlane.getEngine_nbCrit();
 		if(nb==0 || userEngine_nb.getEngine_nb()==0)
 			return -1;
 		else

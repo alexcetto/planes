@@ -19,7 +19,7 @@ public class Capacity extends Criteria {
 	
 	@Override
 	public int evaluate(Plane userPlane) {
-		Capacity userCapacity = (Capacity) userPlane.getCapacity();
+		Capacity userCapacity = (Capacity) userPlane.getCapacityCrit();
 		if(userCapacity.getMin()==0 && userCapacity.getMax()==0 || min_cap==0 && max_cap==0)
 			return -1;
 		else {

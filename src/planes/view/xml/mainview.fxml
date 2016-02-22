@@ -47,6 +47,8 @@
               </FlowPane>
                 <Button fx:id="adminButtonUser" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Manage Users" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" />
                 <Button fx:id="adminButtonData" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Manage Data" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" />
+                <Button fx:id="adminAddButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Add new" textAlignment="CENTER" visible="false" GridPane.columnIndex="4" />
+                <Button fx:id="adminDeleteButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Delete selected" textAlignment="CENTER" visible="false" GridPane.columnIndex="5" />
                 <Button fx:id="reserveButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Reserve" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" />
                 <Button fx:id="purchasesButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="My purchases" textAlignment="CENTER" visible="false" GridPane.columnIndex="3" />
                 <Button id="loginButton" fx:id="logoutButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Logout" />

@@ -21,37 +21,39 @@ public class Plane implements Evaluable{
 		return match;
 	}
 	
-	public Criteria getModel(){
+	public String getModel(){
 		return criterion.getModel();
 	}
 	
-	public Criteria getManufacturer(){
+	public String getManufacturer(){
 		return criterion.getManufacturer();
 	}
 
-	public Criteria getAicraftType() { return criterion.getAicraftType(); }
+	public String getAicraftType() { 
+		return criterion.getAicraftType(); 
+	}
 	
-	public Criteria getEngine(){
+	public String getEngine(){
 		return criterion.getEngine();
 	}
 	
-	public Criteria getPrice(){
+	public String getPrice(){
 		return criterion.getPrice();
 	}
 	
-	public Criteria getSpeed(){
+	public String getSpeed(){
 		return criterion.getSpeed();
 	}
 	
-	public Criteria getEngine_nb(){
+	public String getEngine_nb(){
 		return criterion.getEngine_nb();
 	}
 	
-	public Criteria getCapacity(){
+	public String getCapacity(){
 		return criterion.getCapacity();
 	}
 	
-	public Criteria getWeight(){
+	public String getWeight(){
 		return criterion.getWeight();
 	}
 	
@@ -62,5 +64,23 @@ public class Plane implements Evaluable{
 	@Override
 	public String toString() {
 		return "Plane " + getModel() + " " + getManufacturer();
+	}
+	
+	//		NOT STRING FORMAT
+	
+	public Criteria getPriceCrit(){
+		return criterion.getPriceCrit();
+	}
+	
+	public Criteria getSpeedCrit(){
+		return criterion.getSpeedCrit();
+	}
+	
+	public Criteria getEngine_nbCrit(){
+		return criterion.getEngine_nbCrit();
+	}
+	
+	public Criteria getCapacityCrit(){
+		return criterion.getCapacityCrit();
 	}
 }

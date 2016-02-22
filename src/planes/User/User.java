@@ -119,5 +119,29 @@ public class User {
 		pstt = null;
 		gc = null;
 	}
-
+	
+	public void modifyAdmin(String id, String oldStatus, String newStatus){
+		if(!name.equals(id)){
+			GlobalConnector gc = new GlobalConnector();
+			Connection co = gc.getCo();
+			PreparedStatement pstt;
+			ResultSet rs;
+			int isAdmin;
+			
+			if(newStatus.equals("User"))
+				isAdmin = 0;
+			else
+				isAdmin = 1;
+			
+			try {
+				pstt = co.prepareStatement("UPDATE users SET `admin`='"+ isAdmin + "' WHERE `login`='"+ id + "';");
+				rs = pstt.executeQuery();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			rs = null;
+			pstt = null;
+			gc = null;
+		}
+	}
 }

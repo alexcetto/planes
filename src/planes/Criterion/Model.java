@@ -26,5 +26,4 @@ public class Model extends Criteria {
 	public String toString() {
 		return name;
 	}
-
 }

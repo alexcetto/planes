@@ -45,37 +45,57 @@ public class Criterion extends Criteria implements Evaluable {
 		return index!=0 ? totalScore/index : 100;
 	}
 	
-	public Criteria getModel(){
-		return criterion.get("model");
+	public String getModel(){
+		return ""+criterion.get("model");
 	}
 	
-	public Criteria getManufacturer(){
-		return criterion.get("manufacturer");
+	public String getManufacturer(){
+		return ""+criterion.get("manufacturer");
 	}
 
-	public Criteria getAicraftType(){ return criterion.get("aircraftType"); }
-	
-	public Criteria getEngine(){
-		return criterion.get("engine");
+	public String getAicraftType(){ 
+		return ""+criterion.get("aircraftType"); 
 	}
 	
-	public Criteria getPrice(){
+	public String getEngine(){
+		return ""+criterion.get("engine");
+	}
+	
+	public String getPrice(){
+		return ""+criterion.get("price");
+	}
+	
+	public String getSpeed(){
+		return ""+criterion.get("speed");
+	}
+	
+	public String getEngine_nb(){
+		return ""+criterion.get("engine_nb");
+	}
+	
+	public String getCapacity(){
+		return ""+criterion.get("capacity");
+	}
+	
+	public String getWeight(){
+		return ""+criterion.get("weight");
+	}
+	
+	//		NOT STRING FORMAT
+	
+	public Criteria getPriceCrit(){
 		return criterion.get("price");
 	}
 	
-	public Criteria getSpeed(){
+	public Criteria getSpeedCrit(){
 		return criterion.get("speed");
 	}
 	
-	public Criteria getEngine_nb(){
+	public Criteria getEngine_nbCrit(){
 		return criterion.get("engine_nb");
 	}
 	
-	public Criteria getCapacity(){
+	public Criteria getCapacityCrit(){
 		return criterion.get("capacity");
-	}
-	
-	public Criteria getWeight(){
-		return criterion.get("weight");
 	}
 }

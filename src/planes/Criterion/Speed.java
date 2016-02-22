@@ -12,7 +12,7 @@ public class Speed extends Criteria {
 	
 	@Override
 	public int evaluate(Plane userPlane) {
-		Speed userSpeed = (Speed) userPlane.getSpeed();
+		Speed userSpeed = (Speed) userPlane.getSpeedCrit();
 		if(speed==0 || userSpeed.getSpeed() == 0)
 			return -1;
 		else

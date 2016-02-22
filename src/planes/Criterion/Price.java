@@ -19,10 +19,7 @@ public class Price extends Criteria {
 	
 	@Override
 	public int evaluate(Plane userPlane) {
-		
-		//					A REFAIRE !!
-		
-		Price userPrice = (Price) userPlane.getPrice();
+		Price userPrice = (Price) userPlane.getPriceCrit();
 		if(price_min==0 || userPrice.getMin()==0)
 			return -1;
 		else
