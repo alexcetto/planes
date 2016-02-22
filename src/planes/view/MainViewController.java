@@ -157,7 +157,6 @@ public class MainViewController {
 //            		RECUP IHM
 //          String statement = typeAircraft
 //          RELATION BDD ---> NOS CLASSES?
-            String statement = "";
 
             if (minPriceInput.getText().equals("") || Integer.parseInt(minPriceInput.getText()) < 0)
                 minPrice = 0;
@@ -183,7 +182,7 @@ public class MainViewController {
         		);
 
             try {
-                pstt = co.prepareStatement( "SELECT * FROM plane " + statement + ";" );
+                pstt = co.prepareStatement( "SELECT * FROM plane;" );
                 rs = pstt.executeQuery();
                 if(rs.next()){
                 	int i=0;
