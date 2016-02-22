@@ -16,6 +16,8 @@ import javafx.fxml.FXML;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+// @TODO : Faire les requêtes DB pour enregistrer le panier de User
+
 public class UserBasketController {
     @FXML private Button removeSelectedButton;
     @FXML private TableView<Plane> tableProductsBasket;

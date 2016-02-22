@@ -57,6 +57,7 @@ public class MainViewController {
         logoutButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                user.removeBasket();
                 loginManager.logout();
             }
         });
@@ -124,11 +125,11 @@ public class MainViewController {
 
 
         adminButtonUser.setOnAction((ActionEvent e) -> {
-        	loginManager.showUserManageView();
+        	loginManager.showUserManageView(user);
         });
         
         adminButtonData.setOnAction((ActionEvent e) -> {
-        	loginManager.showDataManageView();
+        	loginManager.showDataManageView(user);
         });
         
         reserveButton.setOnAction((ActionEvent e) -> {
@@ -138,7 +139,10 @@ public class MainViewController {
         });
 
         
-        purchasesButton.setOnAction((ActionEvent e) -> loginManager.showBasketView(user));
+        purchasesButton.setOnAction((ActionEvent e) -> {
+            loginManager.showBasketView(user);
+            purchasesButton.setDisable(true);
+        });
         
         submitCriterion.setOnAction((ActionEvent e) -> {
         	data.clear();

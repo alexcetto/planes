@@ -7,11 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import planes.Plane;
 
+/**
+ * Class User
+ */
 public class User {
     private String name;
     private String mdp;
     private boolean admin;
 	private ObservableList<Plane> panier;
+
 
     public User(String login, String password, boolean isAdmin){
     	name = login;
@@ -56,8 +60,17 @@ public class User {
     public String getName(){
     	return name;
     }
-    
-    public void addPlaneToBasket(ObservableList<Plane> p){
+
+	public String getPassword(){
+		return "****";
+	}
+
+	public String getAdmin(){
+		return admin?"Administrator":"User";
+	}
+
+
+	public void addPlaneToBasket(ObservableList<Plane> p){
 		this.panier.addAll(p);
     }
 
@@ -68,4 +81,43 @@ public class User {
     public ObservableList<Plane> getBasket(){
     	return panier;
     }
+
+	public void removeBasket(){
+		panier.clear();
+	}
+
+	public void removeUser(User user){
+		GlobalConnector gc = new GlobalConnector();
+		Connection co = gc.getCo();
+		PreparedStatement pstt;
+		ResultSet rs;
+
+		try {
+			pstt = co.prepareStatement("DELETE FROM users WHERE `login`='"+ user.getName() + "';");
+			rs = pstt.executeQuery();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		rs = null;
+		pstt = null;
+		gc = null;
+	}
+
+	public void modifyUserName(String oldName, String newName){
+		GlobalConnector gc = new GlobalConnector();
+		Connection co = gc.getCo();
+		PreparedStatement pstt;
+		ResultSet rs;
+
+		try {
+			pstt = co.prepareStatement("UPDATE users SET `login`='"+ newName + "' WHERE `login`='"+ oldName + "';");
+			rs = pstt.executeQuery();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		rs = null;
+		pstt = null;
+		gc = null;
+	}
+
 }

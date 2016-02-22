@@ -66,21 +66,7 @@ public class LoginManager {
         }
     }
     
-    public void showUserManageView(){
-    	try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("xml/usermanageview.fxml")
-            );
-            scene.setRoot((Parent) loader.load());
-            UserManageViewController controller =
-                    loader.<UserManageViewController>getController();
-            controller.initSessionID();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void showDataManageView(){
+    public void showUserManageView(User user){
     	try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("xml/datamanageview.fxml")
@@ -88,7 +74,21 @@ public class LoginManager {
             scene.setRoot((Parent) loader.load());
             DataManageViewController controller =
                     loader.<DataManageViewController>getController();
-            controller.initSessionID();
+            controller.manageUsers(this, user);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void showDataManageView(User user){
+    	try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("xml/datamanageview.fxml")
+            );
+            scene.setRoot((Parent) loader.load());
+            DataManageViewController controller =
+                    loader.<DataManageViewController>getController();
+            controller.manageData(this, user);
         } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }

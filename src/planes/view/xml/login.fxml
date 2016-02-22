@@ -13,9 +13,9 @@
                             <children>
                                 <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                                 <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                                <TextField fx:id="user" promptText="Use &quot;open&quot; to view" text="open"
+                                <TextField fx:id="user" promptText="Use &quot;open&quot; to view" text="a"
                                            GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                <PasswordField fx:id="password" promptText="Use &quot;sesame&quot; to view" text="sesame"
+                                <PasswordField fx:id="password" promptText="Use &quot;sesame&quot; to view" text="a"
                                            GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                             </children>
                             <columnConstraints>
