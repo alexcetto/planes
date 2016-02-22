@@ -35,9 +35,13 @@ public class Type extends Criteria {
 			if(type.equals(userPlane.getType()))
 				return 0;
 			else
-				return 100;
+				return Ponderation.TYPE * 100;
 		}
     }
+	
+	public int getPoids(){
+		return Ponderation.TYPE;
+	}
 
     @Override
     public String toString() {

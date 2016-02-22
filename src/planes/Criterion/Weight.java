@@ -29,17 +29,21 @@ public class Weight extends Criteria {
 			if(weight.equals(userPlane.getWeight().toString()))
 				return 0;
 			else
-				return 100;
+				return Ponderation.WEIGHT * 100;
 		}
+	}
+	
+	public int getCat(){
+		return cat;
+	}
+	
+	public int getPoids(){
+		return Ponderation.WEIGHT;
 	}
 
 	@Override
 	public String toString() {
 		return weight;
-	}
-	
-	public int getCat(){
-		return cat;
 	}
 	
 }

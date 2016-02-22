@@ -16,11 +16,15 @@ public class Speed extends Criteria {
 		if(speed==0 || userSpeed.getSpeed() == 0)
 			return -1;
 		else
-			return (Math.abs(userSpeed.getSpeed()-speed)*100)/userSpeed.getSpeed();
+			return Ponderation.SPEED * (Math.abs(userSpeed.getSpeed()-speed)*100)/userSpeed.getSpeed();
 	}
 	
 	public int getSpeed(){
 		return this.speed;
+	}
+	
+	public int getPoids(){
+		return Ponderation.SPEED;
 	}
 
 	@Override

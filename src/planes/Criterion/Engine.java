@@ -40,8 +40,12 @@ public class Engine extends Criteria {
 			if(type.equals(userPlane.getEngine()))
 				return 0;
 			else
-				return 100;
+				return Ponderation.ENGINE * 100;
 		}
+	}
+	
+	public int getPoids(){
+		return Ponderation.ENGINE;
 	}
 
 	@Override

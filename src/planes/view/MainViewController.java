@@ -37,7 +37,7 @@ public class MainViewController {
     @FXML private Button submitCriterion;
     @FXML private TextField modelInput;
     @FXML private TextField mfrInput;
-    @FXML private ChoiceBox<Integer> engine_nbInput;
+    @FXML private ChoiceBox<String> engine_nbInput;
     @FXML private TextField speedInput;
     @FXML private ChoiceBox<String> weightInput;
     @FXML private TextField capInput;
@@ -226,7 +226,7 @@ public class MainViewController {
             PreparedStatement pstt;
             ResultSet rs;
             
-            int minPrice, maxPrice, userSpeed, userCap;
+            int minPrice, maxPrice, userSpeed, userCap, userNumber;
             try{
             	minPrice = Integer.parseInt(minPriceInput.getText());
             	if(minPrice<MIN_PRICE)
@@ -261,12 +261,18 @@ public class MainViewController {
             	userCap = 0;
             }
             
+            try{
+            	userNumber = Integer.parseInt(engine_nbInput.getValue());
+            }catch(NumberFormatException error){
+            	userNumber = 0;
+            }
+            
             Plane userPlane = new Plane(
             		new Manufacturer(mfrInput.getText()),
             		new Model(modelInput.getText()),
                     new Type(aircraftTypeInput.getValue()),
         			new Engine(engineInput.getValue()),
-        			new Engine_nb(engine_nbInput.getValue()==null?0:engine_nbInput.getValue()),
+        			new Engine_nb(userNumber),
         			new Capacity(userCap),
         			new Weight(weightInput.getValue()),
         			new Speed(userSpeed),

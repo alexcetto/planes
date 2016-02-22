@@ -26,9 +26,9 @@ public class Price extends Criteria {
 			if(price_min >= userPrice.getMin() && price_min <= userPrice.getMax() || userPrice.getMin() == 0 && userPrice.getMax() == 0)
 				return 0;
 			else if(price_min < userPrice.getMin()){
-				return (Math.abs(userPrice.getMin()-price_min)*100)/userPrice.getMin();
+				return Ponderation.PRICE * (Math.abs(userPrice.getMin()-price_min)*100)/userPrice.getMin();
 			} else {
-				return (Math.abs(userPrice.getMax()-price_min)*100)/userPrice.getMax();
+				return Ponderation.PRICE * (Math.abs(userPrice.getMax()-price_min)*100)/userPrice.getMax();
 			}
 		}
 	}
@@ -39,6 +39,10 @@ public class Price extends Criteria {
 	
 	public int getMax(){
 		return this.price_max;
+	}
+	
+	public int getPoids(){
+		return Ponderation.PRICE;
 	}
 
 	@Override

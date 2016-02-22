@@ -17,7 +17,11 @@ public class Model extends Criteria {
 		if(name.toLowerCase().contains(userPlane.getModel().toLowerCase()))
 			return 0;
 		else
-			return -1;
+			return Ponderation.CAPACITY * 100;
+	}
+	
+	public int getPoids(){
+		return Ponderation.MODEL;
 	}
 
 	@Override

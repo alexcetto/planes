@@ -16,11 +16,15 @@ public class Capacity extends Criteria {
 		if(cap==0 || userCapacity.getCap() == 0)
 			return -1;
 		else
-			return (Math.abs(userCapacity.getCap()-cap)*100)/userCapacity.getCap();
+			return Ponderation.CAPACITY * (Math.abs(userCapacity.getCap()-cap)*100)/userCapacity.getCap();
 	}
 	
 	public int getCap(){
 		return cap;
+	}
+	
+	public int getPoids(){
+		return Ponderation.CAPACITY;
 	}
 
 	@Override

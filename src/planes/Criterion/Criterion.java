@@ -39,7 +39,7 @@ public class Criterion extends Criteria implements Evaluable {
 			score = c.getValue().evaluate(userPlane);
 			if(score!=-1){
 				totalScore += score;
-				index++;
+				index += c.getValue().getPoids();
 			}
 		}
 		return index!=0 ? totalScore/index : 100;
