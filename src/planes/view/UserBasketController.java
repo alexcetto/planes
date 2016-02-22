@@ -1,6 +1,5 @@
 package planes.view;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -12,9 +11,6 @@ import planes.Criterion.Criteria;
 import planes.Plane;
 import planes.User.User;
 import javafx.fxml.FXML;
-
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 // @TODO : Faire les requêtes DB pour enregistrer le panier de User
 
@@ -44,10 +40,8 @@ public class UserBasketController {
                 new PropertyValueFactory<>("price"));
 
 
-        removeSelectedButton.setOnAction((ActionEvent e) -> {
-            //ArrayList<Plane> currentSelection = tableProductsBasket.getSelectionModel().getSelectedItems().stream().collect(Collectors.toCollection(ArrayList::new));
-            user.removePlaneToBasket(tableProductsBasket.getSelectionModel().getSelectedItems());
-        });
+        removeSelectedButton.setOnAction((ActionEvent e) ->
+                user.removePlaneToBasket(tableProductsBasket.getSelectionModel().getSelectedItems()));
 
         ObservableList<Plane> productsBasket = user.getBasket();
         tableProductsBasket.setItems(productsBasket);

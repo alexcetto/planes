@@ -3,7 +3,7 @@ package planes.view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import planes.User.User;
 
@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  */
 public class LoginManager {
     private Scene scene;
+    private MainViewController controllerMainView;
 
     public LoginManager(Scene scene) {
         this.scene = scene;
@@ -58,9 +59,9 @@ public class LoginManager {
                     getClass().getResource("xml/mainview.fxml")
             );
             scene.setRoot((Parent) loader.load());
-            MainViewController controller =
+            controllerMainView =
                     loader.<MainViewController>getController();
-            controller.initSessionID(this, user);
+            controllerMainView.initSessionID(this, user);
         } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,24 +80,13 @@ public class LoginManager {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void showDataManageView(User user){
-    	try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("xml/datamanageview.fxml")
-            );
-            scene.setRoot((Parent) loader.load());
-            DataManageViewController controller =
-                    loader.<DataManageViewController>getController();
-            controller.manageData(this, user);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
 
     public void showBasketView(User user){
         try {
-            Stage stage = new Stage();
+            Stage basketStage = new Stage();
+            basketStage.initModality(Modality.WINDOW_MODAL);
+
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("xml/basketview.fxml")
             );
@@ -106,8 +96,9 @@ public class LoginManager {
             controller.initBasket(user);
 
             Scene sc = new Scene(root);
-            stage.setScene(sc);
-            stage.show();
+            basketStage.setScene(sc);
+            basketStage.show();
+            basketStage.setOnCloseRequest(event -> controllerMainView.resetButton());
         } catch (Exception ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }

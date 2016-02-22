@@ -3,17 +3,13 @@ package planes.view;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
-import planes.Criterion.*;
-import planes.Plane;
 import planes.User.GlobalConnector;
 import planes.User.User;
 
@@ -29,9 +25,6 @@ public class DataManageViewController {
 	@FXML Button removeSelectedButton;
 
 
-	public void manageData(LoginManager lg, User user) {
-
-	}
 
 	public void manageUsers(LoginManager lg, User user) {
 		TableView<User> usersTable = new TableView<>();
@@ -52,12 +45,7 @@ public class DataManageViewController {
 		login.setMaxWidth(200);
 		login.setCellValueFactory(new PropertyValueFactory<>("name"));
 		login.setCellFactory(TextFieldTableCell.forTableColumn());
-		login.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<User, String>>() {
-			@Override
-			public void handle(TableColumn.CellEditEvent<User, String> event) {
-				user.modifyUserName(event.getOldValue(), event.getNewValue());
-			}
-		});
+		login.setOnEditCommit(event -> user.modifyUserName(event.getOldValue(), event.getNewValue()));
 
 		TableColumn<User, String> password = new TableColumn<>("Password");
 		password.setMinWidth(50);

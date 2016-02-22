@@ -1,6 +1,7 @@
 package planes.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -28,5 +29,6 @@ public class InterfaceApplication extends Application {
         stage.setMinHeight(600);
         stage.setMinWidth(1000);
         stage.show();
+        stage.setOnCloseRequest(event -> Platform.exit());
     }
 }

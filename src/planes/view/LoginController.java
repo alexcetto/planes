@@ -24,13 +24,10 @@ public class LoginController {
     }
 
     public void initManager(final LoginManager loginManager) {
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                User user = authorize();
-                if (user != null) {
-                    loginManager.authenticated(user);
-                }
+        loginButton.setOnAction(event -> {
+            User user1 = authorize();
+            if (user1 != null) {
+                loginManager.authenticated(user1);
             }
         });
     }

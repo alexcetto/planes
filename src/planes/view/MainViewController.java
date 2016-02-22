@@ -16,8 +16,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  * Controls the main application screen
@@ -62,7 +60,6 @@ public class MainViewController {
             }
         });
 
-        tableProducts.setEditable(true);
         tableProducts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         TableColumn <Plane,Criteria> match = new TableColumn<>("%Match");
@@ -129,7 +126,11 @@ public class MainViewController {
         });
         
         adminButtonData.setOnAction((ActionEvent e) -> {
-        	loginManager.showDataManageView(user);
+            tableProducts.setEditable(true);
+        	// Fonctionne pas à cause d'un pb de conversion Criteria -> String
+
+            //model.setCellFactory(TextFieldTableCell.<Plane, Criteria>forTableColumn();
+            //model.setOnEditCommit(event -> System.out.println("Changement " + event.getNewValue()));
         });
         
         reserveButton.setOnAction((ActionEvent e) -> {
@@ -218,5 +219,9 @@ public class MainViewController {
         tableProducts.setItems(data);
         tableProducts.getColumns().addAll(match, model, mfr, type_aircraft, engine, engine_nb, capacity, speed, weight, price);
         
+    }
+
+    public void resetButton(){
+        purchasesButton.setDisable(false);
     }
 }
