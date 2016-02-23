@@ -71,7 +71,7 @@ public class MainViewController {
             }
         });
 
-        tableProducts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        tableProducts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         TableColumn <Plane,String> match = new TableColumn<>("%Match");
 	        match.setMinWidth(60);
@@ -330,6 +330,9 @@ public class MainViewController {
 			}
 		}
     	System.out.println("Pour le modèle "+model+", on change la valeur de "+row+" en "+value);
+    	
+    	
+    	
 //		//				UPDATE BDD
 //		//				COORDONNER COLUMN NAMES AND BDD NAMES !!!!
 //		GlobalConnector gc = new GlobalConnector();

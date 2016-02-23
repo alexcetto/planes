@@ -21,7 +21,7 @@ public class UserBasketController {
     public void initBasket(User user) {
 
         tableProductsBasket.setEditable(true);
-        tableProductsBasket.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        tableProductsBasket.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         TableColumn<Plane,Criteria> mfr = new TableColumn<>("Manufacturer");
         mfr.setMinWidth(150);
