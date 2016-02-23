@@ -159,12 +159,12 @@ public class MainViewController {
             if(tableProducts.isEditable()){
             	tableProducts.setEditable(false);
             	adminButtonData.setText("Manage Data");
-            	adminAddButton.setVisible(false);
+//            	adminAddButton.setVisible(false);
             	adminDeleteButton.setVisible(false);
             }else{
             	tableProducts.setEditable(true);
             	adminButtonData.setText("Stop Manage");
-            	adminAddButton.setVisible(true);
+//            	adminAddButton.setVisible(true);
             	adminDeleteButton.setVisible(true);
             }
 
@@ -348,9 +348,6 @@ public class MainViewController {
 			}
 		}    	
     	
-    	
-//    	System.out.println(event.);
-    	
 		//				UPDATE BDD
 		GlobalConnector gc = new GlobalConnector();
 		Connection co = gc.getCo();
@@ -358,10 +355,13 @@ public class MainViewController {
 		ResultSet rs;
 
 		try {
-			System.out.println("UPDATE plane SET `"+softToDB.get(row)+"`='"+ value + "' WHERE `model`='"+ model + "';");
 			pstt = co.prepareStatement("UPDATE plane SET `"+softToDB.get(row)+"`='"+ value + "' WHERE `model`='"+ model + "';");
 			rs = pstt.executeQuery();
-			System.out.println("plane updated");
+			
+			
+//			event.getRowValue().set(Criteria);
+		
+		
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

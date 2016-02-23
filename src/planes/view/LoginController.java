@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import planes.User.GlobalConnector;
@@ -13,12 +14,10 @@ import planes.User.User;
  * Controls the view screen
  */
 public class LoginController {
-    @FXML
-    private TextField user;
-    @FXML
-    private PasswordField password;
-    @FXML
-    private Button loginButton;
+    @FXML private TextField user;
+    @FXML private PasswordField password;
+    @FXML private Button loginButton;
+    @FXML private Label passLab;
 
     public void initialize() {
     }
@@ -28,6 +27,8 @@ public class LoginController {
             User user1 = authorize();
             if (user1 != null) {
                 loginManager.authenticated(user1);
+            }else{
+            	passLab.setVisible(true);
             }
         });
     }

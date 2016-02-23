@@ -13,10 +13,13 @@
                             <children>
                                 <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                                 <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                                <TextField fx:id="user" promptText="Use &quot;open&quot; to view" text="a"
+                                <TextField fx:id="user" promptText="Use &quot;open&quot; to view" text="open"
                                            GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                <PasswordField fx:id="password" promptText="Use &quot;sesame&quot; to view" text="a"
-                                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                <PasswordField fx:id="password" promptText="Use &quot;sesame&quot; to view" text="sesame"
+                                           GridPane.columnIndex="1" GridPane.rowIndex="1"/> 
+                                <Label fx:id="passLab" text="Wrong password !" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                <Button fx:id="loginButton" alignment="CENTER" defaultButton="true"
+                                        mnemonicParsing="false" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                             </children>
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0"
@@ -29,12 +32,6 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                             </rowConstraints>
                         </GridPane>
-                        <StackPane prefHeight="-1.0" prefWidth="-1.0">
-                            <children>
-                                <Button fx:id="loginButton" alignment="CENTER" defaultButton="true"
-                                        mnemonicParsing="false" text="Login" StackPane.alignment="CENTER_RIGHT"/>
-                            </children>
-                        </StackPane>
                     </children>
                 </VBox>
             </children>

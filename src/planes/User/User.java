@@ -89,13 +89,7 @@ public class User {
 					}
 				}
 				else{			//	Mauvais mot de passe
-					System.out.println("Identifiant trouv�, mauvais mot de passe !");
 					name = null;
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Wrong password");
-					alert.setHeaderText(null);
-					alert.setContentText("Wrong password entered !");
-					alert.show();
 				}
             }else{				//	Nouvel utilisateur
             	pstt = co.prepareStatement(
@@ -148,12 +142,12 @@ public class User {
     }
 
 	public void removePlaneToBasket(ObservableList<Plane> p){
-		GlobalConnector gc = new GlobalConnector();
 		PreparedStatement pstt;
 		ResultSet rs;
-		Connection co = gc.getCo();
 		
 		for(Plane plane : p){
+			GlobalConnector gc = new GlobalConnector();
+			Connection co = gc.getCo();
 			try{
 				pstt = co.prepareStatement(
 		    			"DELETE FROM panier WHERE `login`='"+ this.name + "' AND `model`='"+ plane.getModel() +"'"
