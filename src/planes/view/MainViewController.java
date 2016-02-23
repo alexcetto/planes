@@ -134,19 +134,19 @@ public class MainViewController {
 
         TableColumn <Plane,String> speed = new TableColumn<>("Speed");
 	        speed.setMinWidth(50);
-	        speed.setMaxWidth(50);
+	        speed.setMaxWidth(100);
 	        speed.setCellValueFactory(
 	                new PropertyValueFactory<>("speed"));
 
         TableColumn <Plane,String> weight = new TableColumn<>("Weight");
 	        weight.setMinWidth(50);
-	        weight.setMaxWidth(50);
+	        weight.setMaxWidth(100);
 	        weight.setCellValueFactory(
 	                new PropertyValueFactory<>("weight"));
 
         TableColumn <Plane,String> price = new TableColumn<>("Price");
 	        price.setMinWidth(50);
-	        price.setMaxWidth(50);
+	        price.setMaxWidth(100);
 	        price.setCellValueFactory(
 	                new PropertyValueFactory<>("price"));
 

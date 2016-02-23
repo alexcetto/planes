@@ -13,7 +13,7 @@ public class Capacity extends Criteria {
 	@Override
 	public int evaluate(Plane userPlane) {
 		Capacity userCapacity = (Capacity) userPlane.getCapacityCrit();
-		if(cap==0 || userCapacity.getCap() == 0)
+		if(userCapacity.getCap() == 0)
 			return -1;
 		else
 			return Ponderation.CAPACITY * (Math.abs(userCapacity.getCap()-cap)*100)/userCapacity.getCap();
