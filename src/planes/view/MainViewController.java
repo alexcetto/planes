@@ -20,6 +20,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 /**
  * Controls the main application screen
@@ -49,6 +52,21 @@ public class MainViewController {
 	public static final int MIN_MATCH = 50;
 	public static final int MIN_PRICE = 0;
 	public static final int MAX_PRICE = 100000000;
+	private static final HashMap<String, String> softToDB;
+    static
+    {
+    	softToDB = new HashMap<String, String>();
+    	softToDB.put("Manufacturer", "manufacturer");
+    	softToDB.put("Model", "model");
+    	softToDB.put("Aircraft Type", "type_aircraft");
+    	softToDB.put("Engine", "type_engine");
+    	softToDB.put("Number", "number_engine");
+    	softToDB.put("Capacity", "number_seats");
+    	softToDB.put("Speed", "speed");
+    	softToDB.put("Weight", "aircraft_weight");
+    	softToDB.put("Price", "price");
+    }
+			
 
     
     private ObservableList<Plane> data = FXCollections.observableArrayList();
@@ -328,28 +346,29 @@ public class MainViewController {
 				alert.showAndWait();
 				return;
 			}
+		}    	
+    	
+    	
+//    	System.out.println(event.);
+    	
+		//				UPDATE BDD
+		GlobalConnector gc = new GlobalConnector();
+		Connection co = gc.getCo();
+		PreparedStatement pstt;
+		ResultSet rs;
+
+		try {
+			System.out.println("UPDATE plane SET `"+softToDB.get(row)+"`='"+ value + "' WHERE `model`='"+ model + "';");
+			pstt = co.prepareStatement("UPDATE plane SET `"+softToDB.get(row)+"`='"+ value + "' WHERE `model`='"+ model + "';");
+			rs = pstt.executeQuery();
+			System.out.println("plane updated");
+		}catch(SQLException e){
+			e.printStackTrace();
 		}
-    	System.out.println("Pour le modèle "+model+", on change la valeur de "+row+" en "+value);
-    	
-    	
-    	
-//		//				UPDATE BDD
-//		//				COORDONNER COLUMN NAMES AND BDD NAMES !!!!
-//		GlobalConnector gc = new GlobalConnector();
-//		Connection co = gc.getCo();
-//		PreparedStatement pstt;
-//		ResultSet rs;
-//
-//		try {
-//			pstt = co.prepareStatement("UPDATE plane SET `"+row+"`='"+ value + "' WHERE `model`='"+ model + "';");
-//			rs = pstt.executeQuery();
-//		}catch(SQLException e){
-//			e.printStackTrace();
-//		}
-//		rs = null;
-//		pstt = null;
-//		gc = null;
-//		//				FIN UPDATE BDD
+		rs = null;
+		pstt = null;
+		gc = null;
+		//				FIN UPDATE BDD
     }
 
 	public void resetButton(){
